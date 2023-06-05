@@ -1,0 +1,43 @@
+<?php
+
+include"dbConn.php";
+
+session_start();
+if($con===false)
+{
+	die("connection error");
+}
+
+
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+	$FA_MemberID=$_POST["FA_MemberID"];
+	$nic=$_POST["nic"];
+    $FA_Code=$_POST["FA_Code"];
+
+
+	$sql="select * from fa_member where fa_memberID='".$fa_memberId."' AND NIC='".$nic."' AND asoociationID='".$FA_Code."'";
+
+	$result=mysqli_query($con,$sql);
+
+	$row=mysqli_fetch_array($result);
+
+	if($row["userType"]=="farmer")
+	{	
+
+		$_SESSION["username"]=$username;
+
+		header("location:farmerHome.php");
+	
+	
+	else
+	{
+		echo "Can not Proceed";
+	}
+
+}
+
+
+
+
+?>

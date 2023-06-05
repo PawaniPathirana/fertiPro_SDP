@@ -35,7 +35,7 @@
             <img src="https://www.agrifarming.in/wp-content/uploads/2022/02/Fertilizer-for-Rice-Crop1-1024x768.jpg" class="img-fluid" style="width: 250px;">
            </div>
            <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Be Verified</p>
-           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Join experienced Designers on this platform.</small>
+           <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">We are happy to have you back.</small>
        </div> 
 
     <!-------------------- ------ Right Box ---------------------------->
@@ -44,8 +44,8 @@
           <div class="row align-items-center">
                 <div class="header-text mb-4">
                 <form action="loginFormval.php" method="POST" > 
-                     <h2>Hello,Again</h2>
-                     <p>We are happy to have you back.</p>
+                     <h2>Welcome to the Login Portal!</h2>
+                     <p>Please enter your credentials to access the system.</p>
                 </div>
                 <?php if (isset($_GET['error'])){?>
     <p class="error"><?php echo $_GET['error'];?></p>
@@ -68,9 +68,7 @@
                 <div class="input-group mb-3">
                     <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
                 </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="images/google.png" style="width:20px" class="me-2"><small>Sign In with Google</small></button>
-                </div>
+                
                 <div class="row">
                     <small>You haven't registered yet?<a href="#">Register</a></small>
                 </div>

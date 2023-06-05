@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/register.css">
-    <title>Farmer registration Stage1</title>
+    <title>Staff Registration Stage1</title>
 </head>
 <body>
 
@@ -37,28 +37,22 @@
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="NIC" name="nic">
                 </div>
-                <label>GN Division</label><br><br>
+                <label>Staff ID</label><br><br>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Staff ID" name="GN_Division">
+                                   </div>
+                                   
+                <label>Designation</label>
                 <div class="input-group mb-3">
       <select class="form-select form-select-lg bg-light fs-6" name="designation">
-        <option selected disabled>Select GN Division</option>
-        <option value="xxx-1r">xxx-1</option>
-        <option value="yyy-2">yyy-2</option>
-        <option value="zzz-3">zzz-3</option>
-        <option value="mmm-4">mmm-4</option>
-        <option value="nnn-5">nnn-5</option>
-        <option value="ttt-6">ttt-6</option>
-        <option value="uuu-7">uuu-7</option>
-
+        <option selected disabled>Select Designation</option>
+        <option value="Development Officer">Farmer</option>
+        <option value="Agriculture Service Officer">Staff</option>
+        <option value="Management Assistent">Supervisor</option>
+        <option value="Manager">Manager</option>
       </select>
     </div>
-                <label>Farmers Association Registration Number</label><br><br>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Farmers Association Registration Number" name="FA_Code">
-                </div>
-                <label>Farmers Association Member ID</label>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Farmers Association Member ID" name="FA_MemberID">
-                </div>
+                
                 <br><br><br><br>
                 </div>
                 <div class="row">
