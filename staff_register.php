@@ -46,10 +46,10 @@
                 <div class="input-group mb-3">
       <select class="form-select form-select-lg bg-light fs-6" name="designation">
         <option selected disabled>Select Designation</option>
-        <option value="Development Officer">Farmer</option>
-        <option value="Agriculture Service Officer">Staff</option>
-        <option value="Management Assistent">Supervisor</option>
-        <option value="Manager">Manager</option>
+        <option value="Development Officer">Divisional Officer</option>
+        <option value="Agriculture Service Officer">Development Officer</option>
+        <option value="Management Assistent">Agriculture Reaserch Officer</option>
+        <option value="Manager">Management Assistent</option>
       </select>
     </div>
                 

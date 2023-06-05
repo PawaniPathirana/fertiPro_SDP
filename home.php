@@ -200,7 +200,7 @@
                 />
                 <h3 class="card-title mb-3">er vbgty</h3>
                 <p class="card-text">
-                AG
+                Divisional Officer
                 </p>
                 <a href="#"><i class="bi bi-phone text-dark mx-1"></i></a>
                 <a href="#"><i class="bi bi-telephone text-dark mx-1"></i></a>
