@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Progressive Form | Multi Steps Form</title>
-	<link rel="stylesheet" type="text/css" href="css/register.css">
+	<link rel="stylesheet" type="text/css" href="css/reg.css">
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
@@ -33,21 +33,20 @@
 			<form action="f_registerVal.php" method="POST">
 				<div class="form_container">
 					<div class="input_wrap">
-						<label for="email">NIC</label>
+						<label for="nic">NIC</label>
 						<input type="text" name="nic" class="input" id="nic">
 					</div>
 					<div class="input_wrap">
-          <select class="form-select form-select-lg bg-light fs-6" name="GN_Division" id="GN_Division">
-        <option selected disabled>Select GN Division</option>
-        <option value="Development Officer">xxx_1</option>
-        <option value="Agriculture Service Officer">yyy_2</option>
-        <option value="Management Assistent">zzz_3</option>
-        <option value="Manager">ttt_4</option>
-      </select>
+						<label for="password">GN Division</label>
+						<input type="text" name="Gn_division" class="input" id="Gn_division">
 					</div>
 					<div class="input_wrap">
-						<label for="confirm_password">Confirm Password</label>
-						<input type="password" name="confirm password" class="input" id="confirm_password">
+						<label for="confirm_password">Farmers Association Registration Number</label>
+						<input type="password" name="asoociationID" class="input" id="asoociationID">
+					</div>
+					<div class="input_wrap">
+						<label for="confirm_password">Farmers Association Member ID</label>
+						<input type="password" name="fa_memberID" class="input" id="fa_memberID">
 					</div>
 				</div>
 			</form>
@@ -114,7 +113,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="js/register.js"></script>
+<script type="text/javascript" src="js/reg.js"></script>
 
 </body>
 </html>

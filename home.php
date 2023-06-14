@@ -20,6 +20,15 @@
     />
     <link rel="stylesheet" href="css/home.css" />
     <title>Agrarian Service Center Srawasthipura</title>
+    <style>
+    .error{
+		background: #F2DEDE;
+		color: #A94442;
+		padding: 10px;
+		width: 95%;
+		border-radius: 5px;
+    }
+        </style>
   </head>
   <body>
     <!-- Navbar -->
@@ -51,9 +60,10 @@
             Register
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownRegister">
-            <li><a class="dropdown-item" href="f_register.php">Farmer</a></li>
-            <li><a class="dropdown-item" href="staff_register.php">Staff Member</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f_reg">Farmer</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#s_reg">Staff Member</a></li>
           </ul>
+          
         </li>
         <li class="nav-item">
           <a href="login.php" class="btn btn-primary">Login</a>
@@ -93,7 +103,7 @@
               gugwudg dkjxbb  jhwgfwfqvefvmn nb sdvnhqb   bddbygdqdl csncbgfcsdcm vc wdncs nbeve vnmb ekjsdv  vncvgcvcbcvc fjwsdjurfur nffhfyegr fur   
             </p>
             <div class="col-md-12 text-center">
-            <a href="#" class="btn btn-light mt-3">
+            <a href="#enroll" class="btn btn-light mt-3">
           <i class="bi bi-chevron-right"></i> Read More
         </a>
         <div>
@@ -304,14 +314,16 @@
     </footer>
 
     <!-- Modal -->
+   
     <div
       class="modal fade"
-      id="enroll"
+      id="f_reg"
       tabindex="-1"
       aria-labelledby="enrollLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
+      aria-hidden="true" 
+      role="dialog"
+      aria-labelledby="modal1-label">
+            <div class="modal-dialog" >
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
@@ -323,25 +335,28 @@
             ></button>
           </div>
           <div class="modal-body">
-            <p class="lead">Fill out this form and we will get back to you</p>
-            <form>
+            <p class="lead">Fill out this form</p>
+            <form action="f_registerVal.php" method="POST">
               <div class="mb-3">
-                <label for="first-name" class="col-form-label">
-                  First Name:
+              <?php if (isset($_GET['error'])){?>
+    <p class="error"><?php echo $_GET['error'];?></p>
+    <?php }?> 
+                <label for="nic" class="col-form-label">
+                  NIC:
                 </label>
-                <input type="text" class="form-control" id="first-name" />
+                <input type="text" class="form-control" id="nic" />
               </div>
               <div class="mb-3">
-                <label for="last-name" class="col-form-label">Last Name:</label>
-                <input type="text" class="form-control" id="last-name" />
+                <label for="GN_Division" class="col-form-label">GN_Division:</label>
+                <input type="text" class="form-control" id="GN_Division" />
               </div>
               <div class="mb-3">
-                <label for="email" class="col-form-label">Email:</label>
-                <input type="email" class="form-control" id="email" />
+                <label for="fa_RegNumber" class="col-form-label">Farmers' Association Registration number:</label>
+                <input type="text" class="form-control" id="fa_RegNumber" />
               </div>
               <div class="mb-3">
-                <label for="phone" class="col-form-label">Phone:</label>
-                <input type="tel" class="form-control" id="phone" />
+                <label for="fa_memberID" class="col-form-label">Farmers Association Member ID:</label>
+                <input type="text" class="form-control" id="fa_memberID" />
               </div>
             </form>
           </div>
@@ -358,7 +373,84 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      id="s_reg"
+      tabindex="-1"
+      aria-labelledby="enrollLabel"
+      aria-hidden="true" 
+      role="dialog"
+      aria-labelledby="modal1-label">
+            <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="lead">Fill out this form</p>
+            <form>
+              <div class="mb-3">
+              <?php if (isset($_GET['error'])){?>
+    <p class="error"><?php echo $_GET['error'];?></p>
+    <?php }?> 
+                <label for="nic" class="col-form-label">
+                  NIC:
+                </label>
+                <input type="text" class="form-control" id="nic" />
+              </div>
+              <div class="mb-3">
+                <label for="s_ID" class="col-form-label">Staff ID:</label>
+                <input type="text" class="form-control" id="s_ID" />
+              </div>
+              <div class="mb-3">
+                <label for="designation" class="col-form-label">Designation:</label>
+                <input type="text" class="form-control" id="Designation" />
+              </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Modal 1</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Modal 2</h2>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -379,5 +471,11 @@
     .setLngLat([80.5487, 7.6419]) // Set the marker coordinates
     .addTo(map);
 </script>
+<script>
+  document.getElementById('farmer').addEventListener('click', function() {
+    document.getElementById('register').classList.add('show');
+  });
+</script>
+
   </body>
 </html>
