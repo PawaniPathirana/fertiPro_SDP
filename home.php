@@ -28,6 +28,18 @@
 		width: 95%;
 		border-radius: 5px;
     }
+    .error_wrap {
+  background-color: #ffcccc;
+  padding: 10px;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  margin: 20px auto;
+  width: 300px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
         </style>
   </head>
   <body>
@@ -312,67 +324,59 @@
         </a>
       </div>
     </footer>
-
-    <!-- Modal -->
-   
-    <div
-      class="modal fade"
-      id="f_reg"
-      tabindex="-1"
-      aria-labelledby="enrollLabel"
-      aria-hidden="true" 
-      role="dialog"
-      aria-labelledby="modal1-label">
-            <div class="modal-dialog" >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p class="lead">Fill out this form</p>
-            <form action="f_registerVal.php" method="POST">
-              <div class="mb-3">
-              <?php if (isset($_GET['error'])){?>
-    <p class="error"><?php echo $_GET['error'];?></p>
-    <?php }?> 
-                <label for="nic" class="col-form-label">
-                  NIC:
-                </label>
-                <input type="text" class="form-control" id="nic" />
-              </div>
-              <div class="mb-3">
-                <label for="GN_Division" class="col-form-label">GN_Division:</label>
-                <input type="text" class="form-control" id="GN_Division" />
-              </div>
-              <div class="mb-3">
-                <label for="fa_RegNumber" class="col-form-label">Farmers' Association Registration number:</label>
-                <input type="text" class="form-control" id="fa_RegNumber" />
-              </div>
-              <div class="mb-3">
-                <label for="fa_memberID" class="col-form-label">Farmers Association Member ID:</label>
-                <input type="text" class="form-control" id="fa_memberID" />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Incorrect information provided.</p>
         </div>
       </div>
     </div>
+  </div>
+    <!-- Modal -->
+   
+    <div class="modal fade" id="f_reg" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <p class="lead">Fill out this form</p>
+        <form action="f_registerVal.php" method="POST">
+          <div class="mb-3">
+          <span id="error-message"></span>
+            
+            <label for="nic" class="col-form-label">NIC:</label>
+            <input type="text" class="form-control" id="nic" name="nic" />
+          </div>
+          <div class="mb-3">
+            <label for="GN_Division" class="col-form-label">GN_Division:</label>
+            <input type="text" class="form-control" id="GN_Division" name="GN_Division" />
+          </div>
+          <div class="mb-3">
+            <label for="fa_RegNumber" class="col-form-label">Farmers' Association Registration number:</label>
+            <input type="text" class="form-control" id="fa_RegNumber" name="fa_RegNumber" />
+          </div>
+          <div class="mb-3">
+            <label for="fa_memberID" class="col-form-label">Farmers Association Member ID:</label>
+            <input type="text" class="form-control" id="fa_memberID" name="fa_memberID" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
     <div
       class="modal fade"
       id="s_reg"
@@ -472,10 +476,18 @@
     .addTo(map);
 </script>
 <script>
-  document.getElementById('farmer').addEventListener('click', function() {
-    document.getElementById('register').classList.add('show');
-  });
-</script>
+    // Check if error message is present in the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorMessage = urlParams.get('error');
+    if (errorMessage === '1') {
+      // Display error message in the modal
+      const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+      errorModal.show();
+    }
+  </script>
+
+
+
 
   </body>
 </html>
