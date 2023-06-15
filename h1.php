@@ -38,15 +38,7 @@
   text-align: center;
   font-weight: bold;
 }
-/* .invalid class prevents CSS from automatically applying */
-.invalid input:required:invalid {
-  background: #BE4C54;
-}
 
-/* Mark valid inputs during .invalid state */
-.invalid input:required:valid {
-  background: #17D654;
-}
 
         </style>
   </head>
@@ -81,7 +73,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownRegister">
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f_reg">Farmer</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#s_reg">Staff Member</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModalLabel">Staff Member</a></li>
           </ul>
           
         </li>
@@ -321,6 +313,58 @@
         </div>
       </div>
     </section>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Open Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="https://www.agrifarming.in/wp-content/uploads/2022/02/Fertilizer-for-Rice-Crop1-1024x768.jpg" class="img-fluid" alt="Modal Image">
+          </div>
+          <div class="col-md-6">
+            <form class="needs-validation" novalidate>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <div class="invalid-feedback">
+                  Please enter a valid email address.
+                </div>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                <div class="invalid-feedback">
+                  Please enter a password.
+                </div>
+              </div>
+              <div class="form-check mb-1">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Footer -->
     <footer class="p-5 bg-dark text-white text-center position-relative">
@@ -347,102 +391,42 @@
   </div>
     <!-- Modal -->
    
-    <div class="modal fade" id="f_reg" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true" role="dialog" aria-labelledby="modal1-label">
+   <!-- Enrollment Form -->
+<div class="modal fade" id="enroll" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="enrollLabel">Registration</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="enrollLabel">Enrollment Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
-        <p class="lead">Fill out this form</p>
-        <form class="needs-validation" novalidate  action="f_registerVal.php" method="POST">
+        <form id="enrollmentForm" method="POST" action="#">
           <div class="mb-3">
-            
-            <label for="nic" class="col-form-label">NIC:</label>
-            <input type="text" class="form-control" id="nic" name="nic"  required />
-            <div class="invalid-feedback">
-              Please enter a valid NIC
-            </div>
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+            <div class="invalid-feedback">Please provide your first name.</div>
           </div>
-           
-
           <div class="mb-3">
-            <label for="GN_Division" class="col-form-label">GN Division:</label>
-            <input type="text" class="form-control" id="GN_Division" name="GN_Division" required />
-            <div class="invalid-feedback">
-            GN Division is Required
-            </div>
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+            <div class="invalid-feedback">Please provide your last name.</div>
           </div>
-          
           <div class="mb-3">
-            <label for="fa_RegNumber" class="col-form-label">Farmers' Association Registration Number:</label>
-            <input type="text" class="form-control" id="fa_RegNumber" name="fa_RegNumber"  required />
-                      <div class="invalid-feedback">
-                      Farmers' Association Registration Number is Required
-            </div>
-
-</div>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <div class="invalid-feedback">Please provide a valid email address.</div>
+          </div>
           <div class="mb-3">
-            <label for="fa_memberID" class="col-form-label">Farmers Association Member ID:</label>
-            <input type="text" class="form-control" id="fa_memberID" name="fa_memberID" required/>
-            <div class="invalid-feedback">
-            Farmers Association Member ID is Required
-            </div>
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+            <div class="invalid-feedback">Please provide a valid phone number.</div>
           </div>
-          
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="s_reg" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true" role="dialog" aria-labelledby="modal1-label">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="enrollLabel">Registration</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-        <p class="lead">Fill out this form</p>
-        <form class="needs-validation" novalidate  action="s_registerVal.php" method="POST">
           <div class="mb-3">
-            
-            <label for="f_name" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="nic" name="nic"  required />
-            <div class="invalid-feedback">
-            First Name is Required
-            </div>
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" name="address" required></textarea>
+            <div class="invalid-feedback">Please provide your address.</div>
           </div>
-           
-
-          <div class="mb-3">
-            <label for="l_name" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="GN_Division" name="GN_Division" required />
-            <div class="invalid-feedback">
-            Last Name is Required
-            </div>
-          </div>
-          
-          <div class="mb-3">
-            <label for="employeeId" class="col-form-label">Employee ID:</label>
-            <input type="text" class="form-control" id="fa_RegNumber" name="fa_RegNumber"  required />
-                      <div class="invalid-feedback">
-                      Employee ID is Required
-            </div>
-
-</div>
-                  
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -450,6 +434,83 @@
 </div>
 
 
+    <div
+      class="modal fade"
+      id="s_reg"
+      tabindex="-1"
+      aria-labelledby="enrollLabel"
+      aria-hidden="true" 
+      role="dialog"
+      aria-labelledby="modal1-label">
+            <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="lead">Fill out this form</p>
+            <form>
+              <div class="mb-3">
+              <?php if (isset($_GET['error'])){?>
+    <p class="error"><?php echo $_GET['error'];?></p>
+    <?php }?> 
+                <label for="nic" class="col-form-label">
+                  NIC:
+                </label>
+                <input type="text" class="form-control" id="nic" />
+              </div>
+              <div class="mb-3">
+                <label for="s_ID" class="col-form-label">Staff ID:</label>
+                <input type="text" class="form-control" id="s_ID" />
+              </div>
+              <div class="mb-3">
+                <label for="designation" class="col-form-label">Designation:</label>
+                <input type="text" class="form-control" id="Designation" />
+              </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Modal 1</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title">Modal 2</h2>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -481,27 +542,7 @@
       errorModal.show();
     }
   </script>
-  <script> 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
 
-  </script>
 
 
 
