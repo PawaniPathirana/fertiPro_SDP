@@ -414,8 +414,8 @@
         <form class="needs-validation" novalidate  action="s_registerVal.php" method="POST">
           <div class="mb-3">
             
-            <label for="f_name" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="nic" name="nic"  required />
+            <label for="firstName" class="col-form-label">First Name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"  required />
             <div class="invalid-feedback">
             First Name is Required
             </div>
@@ -423,16 +423,16 @@
            
 
           <div class="mb-3">
-            <label for="l_name" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="GN_Division" name="GN_Division" required />
+            <label for="lastName" class="col-form-label">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required />
             <div class="invalid-feedback">
             Last Name is Required
             </div>
           </div>
           
           <div class="mb-3">
-            <label for="employeeId" class="col-form-label">Employee ID:</label>
-            <input type="text" class="form-control" id="fa_RegNumber" name="fa_RegNumber"  required />
+            <label for="employeeID" class="col-form-label">Employee ID:</label>
+            <input type="text" class="form-control" id="employeeID" name="employeeID"  required />
                       <div class="invalid-feedback">
                       Employee ID is Required
             </div>
