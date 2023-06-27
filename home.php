@@ -47,7 +47,84 @@
 .invalid input:required:valid {
   background: #17D654;
 }
+* {
+  box-sizing: border-box;
+}
 
+body {
+  background-color: #f1f1f1;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #04AA6D;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #04AA6D;
+}
+</style>
         </style>
   </head>
   <body>
@@ -82,6 +159,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownRegister">
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f_reg">Farmer</a></li>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#s_reg">Staff Member</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f2_reg">Staff2 Member</a></li> 
           </ul>
           
         </li>
@@ -449,8 +527,13 @@
   </div>
 </div>
 
+<!--RegistraionM-->
 
--->
+
+
+>
+
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -502,8 +585,37 @@
   })();
 
   </script>
+//Registraion
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Step 1: Next button
+    var nextStep1Btn = document.getElementById("nextStep1");
+    nextStep1Btn.addEventListener("click", function() {
+      document.getElementById("step1").style.display = "none";
+      document.getElementById("step2").style.display = "block";
+    });
 
+    // Step 2: Previous and Next buttons
+    var prevStep2Btn = document.getElementById("prevStep2");
+    var nextStep2Btn = document.getElementById("nextStep2");
+    prevStep2Btn.addEventListener("click", function() {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step1").style.display = "block";
+    });
+    nextStep2Btn.addEventListener("click", function() {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step3").style.display = "block";
+    });
+
+    // Step 3: Previous button
+    var prevStep3Btn = document.getElementById("prevStep3");
+    prevStep3Btn.addEventListener("click", function() {
+      document.getElementById("step3").style.display = "none";
+      document.getElementById("step2").style.display = "block";
+    });
+  });
+</script>
 
   </body>
 </html>

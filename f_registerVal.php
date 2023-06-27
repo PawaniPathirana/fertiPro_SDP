@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $GN_Division = $_POST["GN_Division"];
   $fa_RegNum = $_POST["fa_RegNumber"];
   $fa_memberID = $_POST["fa_memberID"];
+  
   if (empty($NIC)) {
     header("Location:home.php?error=NIC is required");
     exit();
