@@ -529,7 +529,53 @@ button:hover {
 
 <!--RegistraionM-->
 
-
+<div class="modal fade" id="f2_reg" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true" role="dialog" aria-labelledby="modal1-label">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="enrollLabel">Registration</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <p class="lead">Fill out this form</p>
+        <form action="f_registerVal.php" method="POST">
+                    <label for="nic">National Identity Card Number</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" id="nic" placeholder="NIC" name="nic">
+                    </div>
+                    <label for="staff-id">Staff ID</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" id="staff-id" placeholder="Staff ID" name="GN_Division">
+                    </div>
+                    <label for="designation">Designation</label>
+                    <div class="input-group mb-3">
+                        <select class="form-select form-select-lg bg-light fs-6" id="designation" name="designation">
+                            <option selected disabled>Select Designation</option>
+                            <option value="Development Officer">Divisional Officer</option>
+                            <option value="Agriculture Service Officer">Development Officer</option>
+                            <option value="Management Assistent">Agriculture Research Officer</option>
+                            <option value="Manager">Management Assistant</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <button class="btn btn-lg btn-primary w-100 fs-6">Save and Next</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <button class="btn btn-lg btn-danger w-100 fs-6">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 >
 

@@ -1,176 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/home.css" />
-    <title>Agrarian Service Center Srawasthipura</title>
-	<link rel="stylesheet" type="text/css" href="css/reg.css">
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Staff Registration Stage1</title>
+    <style>
+        .custom-container {
+            width: 600px;
+            margin: auto;
+        }
+        .custom-container h2 {
+            text-align: center;
+        }
+        .tab {
+            display: none;
+        }
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;  
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #04AA6D;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-primary bg-dark navbar-dark py-3 fixed-top">
-  <div class="container">
-    <a href="#" class="navbar-brand">Agrarian Service Center Srawasthipura</a>
+    <!-- Main Container -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+            <!-- Form Container -->
+            <div class="col-md-12 custom-container">
+                <h2>Registration</h2>
+                <p>Please provide your details to complete the registration process</p>
+                <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+                <?php if (isset($_GET['error'])){?>
+                    <p class="error"><?php echo $_GET['error'];?></p>
+                <?php }?>
+                <form action="f_register1Val.php" method="POST" id="regForm">
+                    <div class="tab">
+                        <label for="personalAddress">Personal Address</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="personalAddress" placeholder="Personal Address" name="personalAddress" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Personal Address is required
+                        </div>
+                        <div id="personalAddressError" class="error"></div>
+                        
+                        <label for="nic">NIC</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="nic" placeholder="NIC" name="nic" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            NIC is required
+                        </div>
+                        <div id="nicError" class="error"></div>
+                        
+                        <label for="telephone">Telephone</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="telephone" placeholder="Telephone" name="telephone" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Telephone is required
+                        </div>
+                        <div id="telephoneError" class="error"></div>
+                    </div>
+                    <div class="tab">
+                        <label for="fieldAddress">Field Address</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="fieldAddress" placeholder="Field Address" name="fieldAddress" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Field Address is required
+                        </div>
+                        <div id="fieldAddressError" class="error"></div>
+                        
+                        <label for="fieldSize">Field Size</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="fieldSize" placeholder="Field Size" name="fieldSize" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Field Size is required
+                        </div>
+                        <div id="fieldSizeError" class="error"></div>
+                    </div>
+                    <div class="tab">
+                        <label for="accountNumber">Account Number</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="accountNumber" placeholder="Account Number" name="accountNumber" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Account Number is required
+                        </div>
+                        <div id="accountNumberError" class="error"></div>
+                        
+                        <label for="holderName">Holder Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="holderName" placeholder="Holder Name" name="HolderName" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Holder Name is required
+                        </div>
+                        <div id="holderNameError" class="error"></div>
+                        
+                        <label for="branch">Branch</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="branch" placeholder="Branch" name="Branch" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Branch is required
+                        </div>
+                        <div id="branchError" class="error"></div>
+                    </div>
+                    <div class="tab">
+                        <label for="userName">NIC</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="userName" placeholder="NIC" name="userName" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            NIC is required
+                        </div>
+                        <div id="userNameError" class="error"></div>
+                        
+                        <label for="password">Password</label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" id="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Password is required
+                        </div>
+                        <div id="passwordError" class="error"></div>
+                        
+                        <label for="repeatPassword">Repeat Password</label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" id="repeatPassword" placeholder="Repeat Password" name="repeatPassword" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Password is required
+                        </div>
+                        <div id="repeatPasswordError" class="error"></div>
+                    </div>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+                    <br>
+                    <div style="overflow:auto;">
+                        <div style="float:right;">
+                            <button class="btn btn-primary" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                            <button class="btn btn-primary" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        </div>
+                    </div>
+                </form>
 
-    <div class="collapse navbar-collapse" id="navmenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a href="home.php" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="#aboutUs" class="nav-link">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="#news" class="nav-link">News</a>
-        </li>
-        <li class="nav-item">
-          <a href="#contact" class="nav-link">Contact Us</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRegister" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Register
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownRegister">
-          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f_reg">Farmer</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#s_reg">Staff Member</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f2_reg">Staff2 Member</a></li> 
-          </ul>
-          
-        </li>
-        <li class="nav-item">
-          <a href="login.php" class="btn btn-primary">Login</a>
-        </li>
-      </ul>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-<div class="wrapper">
-	<div class="header">
-		<ul>
-			<li class="active form_1_progessbar">
-				<div>
-					<p>1</p>
-				</div>
-			</li>
-			<li class="form_2_progessbar">
-				<div>
-					<p>2</p>
-				</div>
-			</li>
-			<li class="form_3_progessbar">
-				<div>
-					<p>3</p>
-				</div>
-			</li>
-		</ul>
-	</div>
-	<div class="form_wrap">
-		<div class="form_1 data_info">
-			<h2>Signup Info</h2>
-			<form action="f_registerVal.php" method="POST">
-				<div class="form_container">
-					<div class="input_wrap">
-						<label for="nic">NIC</label>
-						<input type="text" name="nic" class="input" id="nic">
-					</div>
-					<div class="input_wrap">
-						<label for="password">GN Division</label>
-						<input type="text" name="Gn_division" class="input" id="Gn_division">
-					</div>
-					<div class="input_wrap">
-						<label for="confirm_password">Farmers Association Registration Number</label>
-						<input type="password" name="asoociationID" class="input" id="asoociationID">
-					</div>
-					<div class="input_wrap">
-						<label for="confirm_password">Farmers Association Member ID</label>
-						<input type="password" name="fa_memberID" class="input" id="fa_memberID">
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="form_2 data_info" style="display: none;">
-			<h2>Personal Info</h2>
-			<form>
-				<div class="form_container">
-					<div class="input_wrap">
-						<label for="user_name">User Name</label>
-						<input type="text" name="User Name" class="input" id="user_name">
-					</div>
-					<div class="input_wrap">
-						<label for="first_name">First Name</label>
-						<input type="text" name="First Name" class="input" id="first_name">
-					</div>
-					<div class="input_wrap">
-						<label for="last_name">Last Name</label>
-						<input type="text" name="Last Name" class="input" id="last_name">
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="form_3 data_info" style="display: none;">
-			<h2>Professional Info</h2>
-			<form>
-				<div class="form_container">
-					<div class="input_wrap">
-						<label for="company">Current Company</label>
-						<input type="text" name="Current Company" class="input" id="company">
-					</div>
-					<div class="input_wrap">
-						<label for="experience">Total Experience</label>
-						<input type="text" name="Total Experience" class="input" id="experience">
-					</div>
-					<div class="input_wrap">
-						<label for="designation">Designation</label>
-						<input type="text" name="Designation" class="input" id="designation">
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="btns_wrap">
-		<div class="common_btns form_1_btns">
-			<button type="button" class="btn_next">Next <span class="icon"><ion-icon name="arrow-forward-sharp"></ion-icon></span></button>
-		</div>
-		<div class="common_btns form_2_btns" style="display: none;">
-			<button type="button" class="btn_back"><span class="icon"><ion-icon name="arrow-back-sharp"></ion-icon></span>Back</button>
-			<button type="button" class="btn_next">Next <span class="icon"><ion-icon name="arrow-forward-sharp"></ion-icon></span></button>
-		</div>
-		<div class="common_btns form_3_btns" style="display: none;">
-			<button type="button" class="btn_back"><span class="icon"><ion-icon name="arrow-back-sharp"></ion-icon></span>Back</button>
-			<button type="button" class="btn_done">Done</button>
-		</div>
-	</div>
-</div>
 
-<div class="modal_wrapper">
-	<div class="shadow"></div>
-	<div class="success_wrap">
-		<span class="modal_icon"><ion-icon name="checkmark-sharp"></ion-icon></span>
-		<p>You have successfully completed the process.</p>
-	</div>
-</div>
+    <script>
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
 
-<script type="text/javascript" src="js/reg.js"></script>
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            fixStepIndicator(n);
+            // Check if the current tab is the last tab
+            if (currentTab == (x.length - 1)) {
+                // If it is, disable the "Next" button
+                document.getElementById("nextBtn").disabled = true;
+            } else {
+                // Otherwise, re-enable the "Next" button
+                document.getElementById("nextBtn").disabled = false;
+            }
+        }
+
+        function nextPrev(n) {
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets submitted:
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+        // If a field is empty...
+        if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+
+            // Display error message
+            var errorId = y[i].id + "Error";
+            document.getElementById(errorId).textContent = y[i].name + " is required";
+        } else {
+            // Clear error message if field is not empty
+            var errorId = y[i].id + "Error";
+            document.getElementById(errorId).textContent = "";
+        }
+    }
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+        document.getElementsByClassName("step")[currentTab].className += " finish";
+        // Check if the current tab is the last tab
+        if (currentTab == (x.length - 1)) {
+            // Enable the submit button
+            document.getElementById("nextBtn").disabled = false;
+        }
+    } else {
+        // Disable the submit button if there are validation errors
+        document.getElementById("nextBtn").disabled = true;
+    }
+    return valid; // return the valid status
+}
+
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+            x[n].className += " active";
+        }
+    </script>
 
 </body>
 </html>
