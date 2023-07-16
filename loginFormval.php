@@ -41,6 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case "AR_Officer":
                     header("Location: AR_OfficerHome.php");
                     break;
+                    case "management_assistant":
+                        header("Location: management_assistantHome.php");
+                        break;
+                    
                 default:
                     header("Location: login.php?error=Invalid User Type");
                     break;

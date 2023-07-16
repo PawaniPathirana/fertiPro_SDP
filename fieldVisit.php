@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Field Visit Info</title>
+  <title>Staff Registration Stage1</title>
 
+ 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/register.css">
@@ -95,11 +96,11 @@
             <div class="invalid-feedback">
               Staff ID is required
             </div>
-            <div id="staffIDError" class="error"></div>
+            <div id="personalAddressError" class="error"></div>
 
             <label for="date">Date</label>
             <div class="input-group mb-3">
-              <input type="text" class="form-control form-control-lg bg-light fs-6" id="datepicker" placeholder="Date" name="date" required>
+              <input type="text" id="datepicker" class="form-control form-control-lg bg-light fs-6" id="date" placeholder="Date" name="date" required>
             </div>
             <div class="invalid-feedback">
               Date is required
@@ -143,6 +144,7 @@
             </div>
           </div>
         </form>
+
       </div>
     </div>
   </div>
@@ -150,13 +152,18 @@
     $(document).ready(function() {
       $('#datepicker').datepicker();
     });
-
-    $(document).ready(function() {
-      $('#time').datepicker({
-        format: 'hh:mm A'
-      });
+  </script>
+  <script>
+    <script>
+  $(document).ready(function() {
+    $('#time').datetimepicker({
+      format: 'hh:mm A'
     });
+  });
+</script>
 
+  </script>
+  <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
 
@@ -185,6 +192,25 @@
         // Otherwise, re-enable the "Next" button
         document.getElementById("nextBtn").disabled = false;
       }
+    }
+
+    function nextPrev(n) {
+      // This function will figure out which tab to display
+      var x = document.getElementsByClassName("tab");
+      // Exit the function if any field in the current tab is invalid:
+      if (n == 1 && !validateForm()) return false;
+      // Hide the current tab:
+      x[currentTab].style.display = "none";
+      // Increase or decrease the current tab by 1:
+      currentTab = currentTab + n;
+      // if you have reached the end of the form...
+      if (currentTab >= x.length) {
+        // ... the form gets submitted:
+        document.getElementById("regForm").submit();
+        return false;
+      }
+      // Otherwise, display the correct tab:
+      showTab(currentTab);
     }
 
     function validateForm() {
@@ -225,25 +251,6 @@
       return valid; // return the valid status
     }
 
-    function nextPrev(n) {
-      // This function will figure out which tab to display
-      var x = document.getElementsByClassName("tab");
-      // Exit the function if any field in the current tab is invalid:
-      if (n == 1 && !validateForm()) return false;
-      // Hide the current tab:
-      x[currentTab].style.display = "none";
-      // Increase or decrease the current tab by 1:
-      currentTab += n;
-      // if you have reached the end of the form...
-      if (currentTab >= x.length) {
-        // ... the form gets submitted:
-        document.getElementById("regForm").submit();
-        return false;
-      }
-      // Otherwise, display the correct tab:
-      showTab(currentTab);
-    }
-
     function fixStepIndicator(n) {
       // This function removes the "active" class of all steps...
       var i, x = document.getElementsByClassName("step");
@@ -254,6 +261,7 @@
       x[n].className += " active";
     }
   </script>
+
 </body>
 
 </html>

@@ -6,7 +6,7 @@ $username="root";
 $password="";
 $dbname="fertidb";
 
-$con=mysqli_connect($host,$username,$password,$dbname,3307);
+ $con=mysqli_connect($host,$username,$password,$dbname,3307);
 
 
 if(!$con){
