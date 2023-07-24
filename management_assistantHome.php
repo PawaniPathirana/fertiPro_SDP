@@ -213,11 +213,113 @@
                 </div>
                 <div id="field-visits-section" class="section">
                     <h2>Field Visits</h2>
-                    <p>This is the field visits section content.</p>
+                    <!DOCTYPE html>
+<html>
+<head>
+    <title>Fertilizer Quantity Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Fertilizer Quantity Form</h2>
+        <?php
+        if (isset($_GET['success']) && $_GET['success'] === 'true') {
+            echo '<div class="alert alert-success">Data saved successfully!</div>';
+        }
+        ?>
+       <!-- ... (existing code) ... -->
+<form method="POST" action="fertiTypeVal.php">
+    <div class="form-group">
+        <label for="urea_quantity">Quantity per unit - Urea:</label>
+        <input type="text" class="form-control" id="urea_quantity" name="urea_quantity" required>
+        <label for="urea_unit_price">Unit Price - Urea:</label>
+        <input type="text" class="form-control" id="urea_unit_price" name="urea_unit_price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="tsp_quantity">Quantity per unit - T.S.P.:</label>
+        <input type="text" class="form-control" id="tsp_quantity" name="tsp_quantity" required>
+        <label for="tsp_unit_price">Unit Price - T.S.P.:</label>
+        <input type="text" class="form-control" id="tsp_unit_price" name="tsp_unit_price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="mop_quantity">Quantity per unit - M.O.P.:</label>
+        <input type="text" class="form-control" id="mop_quantity" name="mop_quantity" required>
+        <label for="mop_unit_price">Unit Price - M.O.P.:</label>
+        <input type="text" class="form-control" id="mop_unit_price" name="mop_unit_price" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- ... (existing code) ... -->
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
                 </div>
                 <div id="view-farmer-info-section" class="section">
                     <h2>View Farmer Info</h2>
-                    <p>This is the view farmer info section content.</p>
+                    <!DOCTYPE html>
+<html>
+<head>
+    <title>View Fertilizer Data</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Fertilizer Data</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th>Fertilizer Type</th>
+                    <th>Quantity per Unit</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include "dbConn.php";
+
+                // Retrieve data from the database
+                $query = "SELECT * FROM fertilizer_data";
+                $result = $con->query($query);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                       
+                        echo '<td>' . $row['fertilizerType'] . '</td>';
+                        echo '<td>' . $row['quantityPerUnit'] . '</td>';
+                        echo '<td><a href="fertiTypeDelVal.php?action=delete&id=' . $row['ID'] . '">Delete</a> | ';
+                        echo '<a href="edit_data.php?id=' . $row['ID'] . '">Edit</a></td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="4">No data found.</td></tr>';
+                }
+
+                $con->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
                 </div>
                 <div id="current-status-section" class="section">
                     <h2>Current Status</h2>

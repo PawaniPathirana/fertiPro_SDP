@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $_SESSION['Personal_Address'] = $row['Personal_Address'];
       $_SESSION['GN_Division'] = $row['GN_Division'];
       $_SESSION['FA_Code'] = $row['associationID'];
+      $_SESSION['NIC'] = $NIC; // Update the session variable with the correct value
       header("Location: fRegStep2.php");
       exit();
     } 
@@ -45,13 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // Step 2 - Personal Address, Telephone
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['FA_MemberID'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['Personal_Address'])) {
   $personal_address = $_POST['personal_address'];
   $telephone = $_POST['telephone'];
 
   // Validation checks
   if (empty($personal_address)) {
     header("Location: fRegStep2.php?error=Personal Address is required");
+    exit();
+  }
+  if (empty($telephone)) {
+    header("Location: fRegStep2.php?error=Telephone is required");
     exit();
   }
 
@@ -63,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['FA_MemberID'])) {
   header("Location: fRegStep3.php");
   exit();
 }
+
+
+
+
 
 // Step 3 - Field Address, Field Size
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['Personal_Address'])) {

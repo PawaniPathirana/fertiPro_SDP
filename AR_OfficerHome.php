@@ -34,14 +34,14 @@
                     <a href="#current-status-section" class="dashboard"><i class="material-icons">equalizer</i><span>Current Status</span></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#field-visits-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">aspect_ratio</i><span>Field Visits</span></a>
                     <ul class="collapse list-unstyled menu" id="field-visits-section">
                         <li>
                             <a href="#">View</a>
                         </li>
                         <li>
-                            <a href="#">Add</a>
+                            <a href="#field-visits-section">Add</a>
                         </li>
                         <li>
                             <a href="#">Update</a>
@@ -213,7 +213,72 @@
                 </div>
                 <div id="field-visits-section" class="section">
                     <h2>Field Visits</h2>
-                    <p>This is the field visits section content.</p>
+                    <form action="fieldVisitsVal.php" method="POST">
+  <div class="form-group">
+    <label for="officer_name">Employee ID:</label>
+    <input type="text" class="form-control" id="officer_name" name="officer_name">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input type="date" class="form-control datepicker" id="date" name="date">
+  </div>
+
+  <div class="form-group">
+    <label for="time">Time:</label>
+    <input type="time" class="form-control timepicker" id="time" name="time">
+  </div>
+
+  <div class="form-group">
+  <label for="eligibility_status">Eligibility Status:</label>
+  <select class="form-control" id="eligibility_status" name="eligibility_status">
+    <option value="eligible">Eligible</option>
+    <option value="not_eligible">Not Eligible</option>
+  </select>
+</div>
+
+
+  <div class="form-group">
+    <label for="farmer_name">Farmer Name:</label>
+    <input type="text" class="form-control" id="farmer_name" name="farmer_name">
+  </div>
+
+  <div class="form-group">
+    <label for="farmer_nic">Farmer NIC:</label>
+    <input type="text" class="form-control" id="farmer_nic" name="farmer_nic">
+  </div>
+
+  <div class="form-group">
+    <label for="gn_division">GN Division:</label>
+    <input type="text" class="form-control" id="gn_division" name="gn_division">
+  </div>
+
+  
+
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+
+<!-- Include the required libraries -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+
+<script>
+  // Initialize datepicker
+  $('.datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true
+  });
+
+  // Initialize timepicker
+  $('.timepicker').timepicker({
+    showMeridian: false,
+    defaultTime: false
+  });
+</script>
+
                 </div>
                 <div id="view-farmer-info-section" class="section">
                     <h2>View Farmer Info</h2>
