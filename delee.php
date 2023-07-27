@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <th>Recommended Quantity</th>
 <th>Price per Unit</th>
 <th>Total Price for Recommended Quantity</th>
+<th>Change Quantity</th>
 </tr>
 </thead>
 <tbody>";
@@ -92,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<td>" . $quantity . "</td>";
                 echo "<td>" . $pricePerUnit . "</td>";
                 echo "<td>" . $totalPriceForRecommendedQuantity . "</td>";
+                echo "<td><button type=\"button\" class=\"change-quantity-btn\" data-fertilizer-type=\"$fertilizerType\">Change Quantity</button></td>";
                 echo "</tr>";
             }
 
@@ -113,3 +115,31 @@ if (isset($_POST["submitOrder"])) {
     // Rest of your code for order submission goes here
 }
 ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all buttons with class "change-quantity-btn"
+        const changeQuantityButtons = document.querySelectorAll(".change-quantity-btn");
+
+        // Add click event listeners to each button
+        changeQuantityButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                // Get the fertilizer type from the button's data attribute
+                const fertilizerType = button.getAttribute("data-fertilizer-type");
+
+                // Prompt the user to enter a new quantity
+                const newQuantity = prompt(`Enter the new quantity for ${fertilizerType}:`, "");
+
+                // If the user entered a valid quantity, update the quantity in the table
+                if (newQuantity !== null && !isNaN(parseFloat(newQuantity)) && isFinite(newQuantity)) {
+                    const quantityCell = button.parentElement.previousElementSibling.previousElementSibling;
+                    quantityCell.textContent = newQuantity;
+
+                    // Calculate and update the new total price for the updated quantity
+                    const pricePerUnit = parseFloat(button.parentElement.previousElementSibling.textContent);
+                    const newTotalPrice = parseFloat(newQuantity) * pricePerUnit;
+                    button.parentElement.nextElementSibling.textContent = newTotalPrice.toFixed(2);
+                }
+            });
+        });
+    });
+</script>

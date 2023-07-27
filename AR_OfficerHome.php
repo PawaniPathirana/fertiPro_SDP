@@ -210,53 +210,53 @@
                 <div id="current-status-section" class="section">
                     <h2>Current Status</h2>
                     <p>This is the current status section content.</p>
+                    
                 </div>
                 <div id="field-visits-section" class="section">
-                    <h2>Field Visits</h2>
-                    <form action="fieldVisitsVal.php" method="POST">
-  <div class="form-group">
-    <label for="officer_name">Employee ID:</label>
-    <input type="text" class="form-control" id="officer_name" name="officer_name">
-  </div>
+    <h2>Field Visits</h2>
+    <form action="fieldVisitsVal.php" method="POST" class="smaller-form">
+        <div class="form-group">
+            <label for="officer_name">Employee ID:</label>
+            <input type="text" class="form-control form-control-sm" id="officer_name" name="officer_name" style="width: 500px;">
+        </div>
 
-  <div class="form-group">
-    <label for="date">Date:</label>
-    <input type="date" class="form-control datepicker" id="date" name="date">
-  </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control form-control-sm datepicker" id="date" name="date" style="width: 500px;">
+        </div>
 
-  <div class="form-group">
-    <label for="time">Time:</label>
-    <input type="time" class="form-control timepicker" id="time" name="time">
-  </div>
+        <div class="form-group">
+            <label for="time">Time:</label>
+            <input type="time" class="form-control form-control-sm timepicker" id="time" name="time" style="width: 500px;">
+        </div>
 
-  <div class="form-group">
-  <label for="eligibility_status">Eligibility Status:</label>
-  <select class="form-control" id="eligibility_status" name="eligibility_status">
-    <option value="eligible">Eligible</option>
-    <option value="not_eligible">Not Eligible</option>
-  </select>
+        <div class="form-group">
+            <label for="eligibility_status">Eligibility Status:</label>
+            <select class="form-control form-control-sm" id="eligibility_status" name="eligibility_status" style="width: 500px;">
+                <option value="eligible">Eligible</option>
+                <option value="not_eligible">Not Eligible</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="farmer_name">Farmer Name:</label>
+            <input type="text" class="form-control form-control-sm" id="farmer_name" name="farmer_name" style="width: 500px;">
+        </div>
+
+        <div class="form-group">
+            <label for="farmer_nic">Farmer NIC:</label>
+            <input type="text" class="form-control form-control-sm" id="farmer_nic" name="farmer_nic" style="width: 500px;">
+        </div>
+
+        <div class="form-group">
+            <label for="gn_division">GN Division:</label>
+            <input type="text" class="form-control form-control-sm" id="gn_division" name="gn_division" style="width: 500px;">
+        </div>
+
+        <input type="submit" class="btn btn-primary btn-sm" value="Submit">
+    </form>
 </div>
 
-
-  <div class="form-group">
-    <label for="farmer_name">Farmer Name:</label>
-    <input type="text" class="form-control" id="farmer_name" name="farmer_name">
-  </div>
-
-  <div class="form-group">
-    <label for="farmer_nic">Farmer NIC:</label>
-    <input type="text" class="form-control" id="farmer_nic" name="farmer_nic">
-  </div>
-
-  <div class="form-group">
-    <label for="gn_division">GN Division:</label>
-    <input type="text" class="form-control" id="gn_division" name="gn_division">
-  </div>
-
-  
-
-  <input type="submit" class="btn btn-primary" value="Submit">
-</form>
 
 <!-- Include the required libraries -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -282,8 +282,8 @@
                 </div>
                 <div id="view-farmer-info-section" class="section">
                     <h2>View Farmer Info</h2>
-                    <p>This is the view farmer info section content.</p>
-                </div>
+                   
+   
                 <div id="current-status-section" class="section">
                     <h2>Current Status</h2>
                     <p>This is another current status section content.</p>
@@ -294,7 +294,45 @@
                 </div>
                 <div id="orders-section" class="section">
                     <h2>Orders</h2>
-                    <p>This is the orders section content.hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhfdihfnughhhhhhhhhhhhhhhhhhhhhhvvvvvvvvvvvchgytrwdsuijknhbgtrfecvcbgdarwfyhuijndgatrf</p>
+                    <!DOCTYPE html>
+<html>
+<head>
+    <title>GN Division Form</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2> </h2>
+        <form method="post" action="orderInfoVal.php">
+            <div class="form-group">
+                <label for="gnDivision">Select GN Division:</label>
+                <input class="form-control" id="gnDivision" name="gnDivision">
+                    <!-- Add options dynamically using PHP -->
+                    <?php
+                    // Replace 'your_database_name' with your actual database name
+                   /* $con=mysqli_connect("localhost","root","","fertidb",3307);
+                    if ($con) {
+                        $query = "SELECT gn_division_id, gnDivisionName FROM gn_division";
+                        $result = mysqli_query($con, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='{$row['gn_division_id']}'>{$row['gnDivisionName']}</option>";
+                        }
+                        mysqli_close($con);
+                    }*/
+                    ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
                 </div>
                 <div id="tables-section" class="section">
                     <h2>Tables</h2>
@@ -302,7 +340,22 @@
                 </div>
                 <div id="issue-fertilizer-section" class="section">
                     <h2>Issue Fertilizer</h2>
-                    <p>This is the issue fertilizer section content.</p>
+                    <div class="container mt-4">
+        <form method="post" action="farmer_orderVal.php">
+            <div class="form-group">
+                <label for="farmerNIC">Farmer NIC:</label>
+                <input type="text" class="form-control" id="farmerNIC" name="farmerNIC" required>
+            </div>
+            <div class="form-group">
+                <label for="gnDivision">GN Division:</label>
+                <input type="text" class="form-control" id="gnDivision" name="gnDivision" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+                </div>
                 </div>
                 <div id="copy-section" class="section">
                     <h2>Copy</h2>

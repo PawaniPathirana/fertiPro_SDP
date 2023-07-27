@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case "devOfficer":
                     header("Location: devOfficerHome.php");
                     break;
-                case "AR_Officer":
+                case "agriculture_research_officer":
                     header("Location: AR_OfficerHome.php");
                     break;
                     case "management_assistant":
