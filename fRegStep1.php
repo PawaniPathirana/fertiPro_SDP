@@ -14,7 +14,7 @@
         echo '<p class="error">' . $_GET['error'] . '</p>';
       }
     ?>
-    <form action="register.php" method="POST">
+    <form action="f1.php" method="POST" >
       <input type="text" name="nic" placeholder="NIC" id =nic required>
       <input type="text" name="gn_division" placeholder="GN Division" required>
       <input type="text" name="reg_number" placeholder="Farmers' Association Registration Number" required>

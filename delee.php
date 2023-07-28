@@ -104,51 +104,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<h3>Total Price of the Order: $" . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
-            echo "<button type='submit' class='btn btn-primary' id='orderButton'>Order</button>";
+            echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton'>Order</button>";
             echo "</form>";
 
-            // Get the current date and time
-            $orderDate = date("Y-m-d");
-            $orderTime = date("H:i:s");
+            // Check if the "Order" button has been pressed
+            if (isset($_POST["orderButton"])) {
+                // Get the current date and time
+                $orderDate = date("Y-m-d");
+                $orderTime = date("H:i:s");
 
-            // Get the AR Officer ID based on gnDivisionName
-            $sql = "SELECT gn_division_id FROM gn_division WHERE gnDivisionName = ?";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $gnDivision);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $gnDivisionID = $row["gn_division_id"];
+                // Get the AR Officer ID based on gnDivisionName
+                $sql = "SELECT gn_division_id FROM gn_division WHERE gnDivisionName = ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $gnDivision);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $gnDivisionID = $row["gn_division_id"];
 
-            // Get the AR Officer ID based on gnDivisionID
-            $sql = "SELECT ar_officerID FROM ar_officer WHERE gn_division_id = ?";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $gnDivisionID);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $arOfficerID = $row["ar_officerID"];
+                // Get the AR Officer ID based on gnDivisionID
+                $sql = "SELECT ar_officerID FROM ar_officer WHERE gn_division_id = ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $gnDivisionID);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $arOfficerID = $row["ar_officerID"];
 
-            // Insert the order into the orders table
-            $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 
-                    priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param(
-                "sssssssssss",
-                $orderDate,
-                $orderTime,
-                $recommendedQuantity["Urea"],
-                $recommendedQuantity["MOP"],
-                $recommendedQuantity["TSP"],
-                $pricePerUnit,
-                $pricePerUnit,
-                $pricePerUnit,
-                $totalPriceOfOrder,
-                $arOfficerID,
-                $farmerID
-            );
-            $stmt->execute();
+                // Insert the order into the orders table
+                $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 
+                        priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param(
+                    "sssssssssss",
+                    $orderDate,
+                    $orderTime,
+                    $recommendedQuantity["Urea"],
+                    $recommendedQuantity["MOP"],
+                    $recommendedQuantity["TSP"],
+                    $pricePerUnit,
+                    $pricePerUnit,
+                    $pricePerUnit,
+                    $totalPriceOfOrder,
+                    $arOfficerID,
+                    $farmerID
+                );
+                $stmt->execute();
+
+                echo "<p>Order placed successfully!</p>";
+            }
         }
     }
 }
