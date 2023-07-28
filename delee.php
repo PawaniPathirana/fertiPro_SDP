@@ -1,14 +1,13 @@
 <?php
 include "dbConn.php";
-
 session_start();
+
 if ($con === false) {
     die("Connection error");
 }
 
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Get the GN Division and NIC from the form
     $gnDivision = $_POST["gnDivision"];
     $nic = $_POST["nic"];
@@ -27,6 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // The farmer exists and is eligible
         $row = $result->fetch_assoc();
+
+        // Save the farmerID in the session for use in process_order.php
+        $_SESSION["farmerID"] = $row["farmerID"];
 
         // Get the farmerID
         $farmerID = $row["farmerID"];
@@ -68,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <th>Recommended Quantity</th>
 <th>Price per Unit</th>
 <th>Total Price for Recommended Quantity</th>
-<th>Change Quantity</th>
 </tr>
 </thead>
 <tbody>";
@@ -90,10 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 echo "<tr>";
                 echo "<td>" . $fertilizerType . "</td>";
-                echo "<td>" . $quantity . "</td>";
-                echo "<td>" . $pricePerUnit . "</td>";
-                echo "<td>" . $totalPriceForRecommendedQuantity . "</td>";
-                echo "<td><button type=\"button\" class=\"change-quantity-btn\" data-fertilizer-type=\"$fertilizerType\">Change Quantity</button></td>";
+                echo "<td>" . $quantity . " kg</td>";
+                echo "<td>$" . $pricePerUnit . "</td>";
+                echo "<td>$" . $totalPriceForRecommendedQuantity . "</td>";
                 echo "</tr>";
             }
 
@@ -101,45 +101,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </table>";
 
             // Display the total price of the order
-            echo "<h3>Total Price of the Order: " . $totalPriceOfOrder . "</h3>";
+            echo "<h3>Total Price of the Order: $" . $totalPriceOfOrder . "</h3>";
 
-            // Button to submit the order
-            echo "<button type=\"submit\" name=\"submitOrder\" class=\"btn btn-primary\">Submit Order</button>";
+            // Add the "Order" button
+            echo "<button type='submit' class='btn btn-primary' id='orderButton'>Order</button>";
             echo "</form>";
+
+            // Get the current date and time
+            $orderDate = date("Y-m-d");
+            $orderTime = date("H:i:s");
+
+            // Get the AR Officer ID based on gnDivisionName
+            $sql = "SELECT gn_division_id FROM gn_division WHERE gnDivisionName = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $gnDivision);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $gnDivisionID = $row["gn_division_id"];
+
+            // Get the AR Officer ID based on gnDivisionID
+            $sql = "SELECT ar_officerID FROM ar_officer WHERE gn_division_id = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $gnDivisionID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $arOfficerID = $row["ar_officerID"];
+
+            // Insert the order into the orders table
+            $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 
+                    priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param(
+                "sssssssssss",
+                $orderDate,
+                $orderTime,
+                $recommendedQuantity["Urea"],
+                $recommendedQuantity["MOP"],
+                $recommendedQuantity["TSP"],
+                $pricePerUnit,
+                $pricePerUnit,
+                $pricePerUnit,
+                $totalPriceOfOrder,
+                $arOfficerID,
+                $farmerID
+            );
+            $stmt->execute();
         }
     }
 }
-
-// Check if the order form has been submitted
-if (isset($_POST["submitOrder"])) {
-    // Rest of your code for order submission goes here
-}
 ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all buttons with class "change-quantity-btn"
-        const changeQuantityButtons = document.querySelectorAll(".change-quantity-btn");
-
-        // Add click event listeners to each button
-        changeQuantityButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                // Get the fertilizer type from the button's data attribute
-                const fertilizerType = button.getAttribute("data-fertilizer-type");
-
-                // Prompt the user to enter a new quantity
-                const newQuantity = prompt(`Enter the new quantity for ${fertilizerType}:`, "");
-
-                // If the user entered a valid quantity, update the quantity in the table
-                if (newQuantity !== null && !isNaN(parseFloat(newQuantity)) && isFinite(newQuantity)) {
-                    const quantityCell = button.parentElement.previousElementSibling.previousElementSibling;
-                    quantityCell.textContent = newQuantity;
-
-                    // Calculate and update the new total price for the updated quantity
-                    const pricePerUnit = parseFloat(button.parentElement.previousElementSibling.textContent);
-                    const newTotalPrice = parseFloat(newQuantity) * pricePerUnit;
-                    button.parentElement.nextElementSibling.textContent = newTotalPrice.toFixed(2);
-                }
-            });
-        });
-    });
-</script>
