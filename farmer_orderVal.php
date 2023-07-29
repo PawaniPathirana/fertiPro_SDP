@@ -34,7 +34,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Retrieve the available quantities from the stock table
                 $sql_stock = "SELECT stockID, totalQuantity, quantityOfUrea, quantityOfMOP, quantityOfTSP FROM stock WHERE gn_divisionID = '$gn_divisionID'";
                 $result_stock = $con->query($sql_stock);
-
+                $sql = "SELECT orderID, orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID FROM orders";
+                $result = $con->query($sql);
+                
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $orderID = $row["orderID"];
+                        $orderDate = $row["orderDate"];
+                        $orderTime = $row["orderTime"];
+                        $quantityOfUrea = $row["quantityOfUrea"];
+                        $quantityOfMOP = $row["quantityOfMOP"];
+                        $quantityOfTSP = $row["quantityOfTSP"];
+                        $priceOfUrea = $row["priceOfUrea"];
+                        $priceOfMOP = $row["priceOfMOP"];
+                        $priceOfTSP = $row["priceOfTSP"];
+                        $totalPrice = $row["totalPrice"];
+                        $ar_officerID = $row["ar_officerID"];
+                        $farmerID = $row["farmerID"];
+                        
+                    }
+                }
+                $totalQuantity1 = $quantityOfUrea + $quantityOfMOP + $quantityOfTSP;
                 if ($result_stock->num_rows > 0) {
                     $row_stock = $result_stock->fetch_assoc();
                     $stockID = $row_stock["stockID"];
@@ -49,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $updatedUrea = $availableUrea - $quantityOfUrea;
                         $updatedMOP = $availableMOP - $quantityOfMOP;
                         $updatedTSP = $availableTSP - $quantityOfTSP;
-                        $updatedTotalQuantity = $totalQuantity - ($quantityOfUrea + $quantityOfMOP + $quantityOfTSP);
+                        $updatedTotalQuantity = $updatedUrea+$updatedMOP+ $updatedTSP;
 
                         $sql_update_stock = "UPDATE stock SET quantityOfUrea = '$updatedUrea', quantityOfMOP = '$updatedMOP', quantityOfTSP = '$updatedTSP', totalQuantity = '$updatedTotalQuantity' WHERE gn_divisionID = '$gn_divisionID'";
                         $con->query($sql_update_stock);
@@ -59,9 +79,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $time = date("H:i:s");
                         $sql_insert_order = "INSERT INTO `delivered_orders` (orderID, date, time) VALUES ('$orderID', '$date', '$time')";
                         $con->query($sql_insert_order);
+                        //date_default_timezone_set("Asia/Colombo");
+                        // Create a report
+                        $report = "Order successfully processed!\n\n"
+                        . "Farmer NIC: $farmerNIC\n"
+                        . "GN Division: $gnDivision\n"
+                        . "Quantity of Urea: $quantityOfUrea\n"
+                        . "Quantity of M.O.P: $quantityOfMOP\n"
+                        . "Quantity of T.S.P: $quantityOfTSP\n"
+                        . "Total Quantity: $totalQuantity1\n\n"
+                        . "Price for Urea: $priceOfUrea\n"
+                        . "Price for M.O.P: $priceOfMOP\n"
+                        . "Price for T.S.P: $priceOfTSP\n"
+                        . "Total Price: $totalPrice\n\n"
+                        . "Report generated on: $date, $time";
+           
+           $report_html = nl2br($report);
+           
+           echo $report_html;
+                        echo "<button onclick='window.print()'>Print</button>";
 
-                        // Display success message to the user
-                        echo "Order successfully processed!";
+                        echo "<a href='report.php?report=$report'>Download PDF</a>";
+                        // Redirect to a different page with the report
+                      //  header("Location: report.php?report=$report");
+
                     } else {
                         // Display error message to the user - Insufficient stock
                         echo "Error: Insufficient stock!";
