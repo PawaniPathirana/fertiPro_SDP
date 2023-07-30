@@ -8,10 +8,16 @@ if ($con === false) {
 
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the GN Division and NIC from the form
-    $gnDivision = $_POST["gnDivision"];
-    $nic = $_POST["nic"];
+    // Check if the required form fields are set
+    if (isset($_POST["gnDivision"]) && isset($_POST["nic"])) {
+        // Get the GN Division and NIC from the form
+        $gnDivision = $_POST["gnDivision"];
+        $nic = $_POST["nic"];
 
+        // Save the GN Division and NIC in the session for use later
+        $_SESSION['gnDivision'] = $gnDivision;
+        $_SESSION['nic'] = $nic;
+    }
     // Check if the farmer exists and has eligibility status 'eligible'
     $sql = "SELECT * FROM fieldvisit WHERE gnDivision = ? AND farmerNIC = ? AND eligibilityStatus = 'eligible'";
     $stmt = $con->prepare($sql);
@@ -58,10 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             while ($row = $result->fetch_assoc()) {
                 $recommendedQuantity[$row["fertilizerType"]] = round($fieldSize * $row["quantityPerUnit"], 2);
             }
-
+           // session_start();
+           // $farmerID = $_SESSION['farmerID'];
+           // $arOfficerID= $_SESSION['ar_officerID'];
             // Display the fertilizer calculator
             echo "<h2>Fertilizer Calculator</h2>";
-            echo "<form method=\"POST\" action=\"\">";
+            echo '<form method="POST" action="paw.php">';
+
+
 
             echo "<table class=\"table table-bordered\">
 <thead>

@@ -43,7 +43,9 @@
 
 <h3>Total Price of the Order: <span id="totalPrice"></span></h3>
 
+
 <script>
+  
   $(document).ready(function() {
     // Calculate the total price of the order
     var totalPrice = 0;
