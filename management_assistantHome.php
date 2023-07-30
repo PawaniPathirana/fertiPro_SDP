@@ -219,10 +219,34 @@
     <title>Fertilizer Quantity Form</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        
+        .container {
+            margin-top: 50px;
+            width:100px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container mt-4">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area"  >
+            <div class="col-md-12 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-5">
         <h2>Fertilizer Quantity Form</h2>
         <?php
         if (isset($_GET['success']) && $_GET['success'] === 'true') {
@@ -233,35 +257,37 @@
 <form method="POST" action="fertiTypeVal.php">
     <div class="form-group">
         <label for="urea_quantity">Quantity per unit - Urea:</label>
-        <input type="text" class="form-control" id="urea_quantity" name="urea_quantity" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="urea_quantity" name="urea_quantity" required>
         <label for="urea_unit_price">Unit Price - Urea:</label>
-        <input type="text" class="form-control" id="urea_unit_price" name="urea_unit_price" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="urea_unit_price" name="urea_unit_price" required>
     </div>
 
     <div class="form-group">
         <label for="tsp_quantity">Quantity per unit - T.S.P.:</label>
-        <input type="text" class="form-control" id="tsp_quantity" name="tsp_quantity" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="tsp_quantity" name="tsp_quantity" required>
         <label for="tsp_unit_price">Unit Price - T.S.P.:</label>
-        <input type="text" class="form-control" id="tsp_unit_price" name="tsp_unit_price" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="tsp_unit_price" name="tsp_unit_price" required>
     </div>
 
     <div class="form-group">
         <label for="mop_quantity">Quantity per unit - M.O.P.:</label>
-        <input type="text" class="form-control" id="mop_quantity" name="mop_quantity" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="mop_quantity" name="mop_quantity" required>
         <label for="mop_unit_price">Unit Price - M.O.P.:</label>
-        <input type="text" class="form-control" id="mop_unit_price" name="mop_unit_price" required>
+        <input type="text" class="form-control form-control-lg bg-light fs-6" id="mop_unit_price" name="mop_unit_price" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Submit</button>
 </form>
-
-
+</div>
+</div>
+</div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
                 </div>

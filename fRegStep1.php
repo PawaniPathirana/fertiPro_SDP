@@ -1,26 +1,62 @@
-<!-- registration_step1.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Registration - Step 1</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+    .error{
+        background: #F2DEDE;
+        color: #A94442;
+        padding: 10px;
+        width: 95%;
+        border-radius: 5px;
+    }
+   
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Registration - Step 1</h2>
-    <?php
-      // Display error message if it exists in the URL parameters
-      if (isset($_GET['error'])) {
-        echo '<p class="error">' . $_GET['error'] . '</p>';
-      }
-    ?>
-    <form action="f1.php" method="POST" >
-      <input type="text" name="nic" placeholder="NIC" id =nic required>
-      <input type="text" name="gn_division" placeholder="GN Division" required>
-      <input type="text" name="reg_number" placeholder="Farmers' Association Registration Number" required>
-      <input type="text" name="member_id" placeholder="Farmers Association Member ID" required>
-      <button type="submit">Next</button>
-    </form>
-  </div>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area"  >
+            <div class="col-md-12 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-5">
+                        <form action="f1.php" method="POST"> 
+                            <h2 class="mb-3">Registration - Step 1</h2>
+                            <?php
+                                // Display error message if it exists in the URL parameters
+                                if (isset($_GET['error'])) {
+                                    echo '<p class="error">' . $_GET['error'] . '</p>';
+                                }
+                            ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nic" class="form-label">NIC:</label>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="NIC" name="nic" id="nic" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gn_division" class="form-label">GN Division:</label>
+                        <select class="form-control form-control-lg bg-light fs-6" id="gn_division" name="gn_division" required>
+                            <option value="">Select GN Division</option>
+                            <option value="xxx-1">xxx-1</option>
+                            <option value="yyy-2">yyy-2</option>
+                            <option value="zzz-3">zzz-3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reg_number" class="form-label">Farmers' Association Registration Number:</label>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Farmers' Association Registration Number" name="reg_number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="member_id" class="form-label">Farmers Association Member ID:</label>
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Farmers Association Member ID" name="member_id" required>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Next</button>
+                </form>
+            </div>
+        </div> 
+    </div>
 </body>
 </html>

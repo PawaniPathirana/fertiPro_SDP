@@ -102,8 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<tr>";
                 echo "<td>" . $fertilizerType . "</td>";
                 echo "<td>" . $quantity . " kg</td>";
-                echo "<td>$" . $pricePerUnit . "</td>";
-                echo "<td>$" . $totalPriceForRecommendedQuantity . "</td>";
+                echo "<td>Rs." . $pricePerUnit . "</td>";
+                echo "<td>Rs." . $totalPriceForRecommendedQuantity . "</td>";
                 echo "</tr>";
             }
 
@@ -111,10 +111,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </table>";
 
             // Display the total price of the order
-            echo "<h3>Total Price of the Order: $" . $totalPriceOfOrder . "</h3>";
+            echo "<h3>Total Price of the Order: " . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
+            
             echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton'>Order</button>";
+           
+            echo "</form>";
+            echo '<form method="POST" action="changeOrderVal.php">';
+            echo "<button type='Submit' class='btn btn-primary' id='Change' name='orderButton'>Change The Order</button>";
             echo "</form>";
 
             // Check if the "Order" button has been pressed
