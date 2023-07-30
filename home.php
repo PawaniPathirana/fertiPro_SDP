@@ -157,7 +157,7 @@ button:hover {
             Register
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownRegister">
-          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f_reg">Farmer</a></li>
+          <li><a class="dropdown-item"  href="fRegStep1.php">Farmer</a></li>
             <li><a class="dropdown-item"  href="sRegStep1.php">Staff Member</a></li>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#f2_reg">Staff2 Member</a></li> 
           </ul>

@@ -10,7 +10,7 @@
 
 <div class="container">
 
-  <h1>Multistep Registration Form</h1>
+  
 
   <form action="f2.php" method="post">
 

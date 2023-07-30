@@ -51,7 +51,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+              <!--  <li class="dropdown">
                     <a href="#view-farmer-info-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">apps</i><span>View Farmer Info</span></a>
                     <ul class="collapse list-unstyled menu" id="view-farmer-info-section">
@@ -64,8 +64,8 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
-                </li>
+  </ul>-->
+              <!--  </li>
                 <li class="dropdown">
                     <a href="#current-status-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">equalizer</i><span>Current Status</span></a>
@@ -79,7 +79,7 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
+ </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#ui-element-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -94,12 +94,12 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
+                    </ul>--> 
                 </li>
                 <li class="dropdown">
                     <a href="#orders-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">border_color</i><span>Orders</span></a>
-                    <ul class="collapse list-unstyled menu" id="orders-section">
+                   <!-- <ul class="collapse list-unstyled menu" id="orders-section">
                         <li>
                             <a href="#">Page 1</a>
                         </li>
@@ -109,9 +109,9 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
+ </ul>-->
                 </li>
-                <li class="dropdown">
+              <!--  <li class="dropdown">
                     <a href="#tables-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">grid_on</i><span>Tables</span></a>
                     <ul class="collapse list-unstyled menu" id="tables-section">
@@ -124,13 +124,13 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
-                </li>
+ </ul>
+                </li>--> 
                 <li class="dropdown">
                     <a href="#issue-fertilizer-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">content_copy</i><span>Issue Fertilizer</span></a>
                     <ul class="collapse list-unstyled menu" id="issue-fertilizer-section">
-                        <li>
+                      <!--  <li>
                             <a href="#">Page 1</a>
                         </li>
                         <li>
@@ -139,7 +139,7 @@
                         <li>
                             <a href="#">Page 3</a>
                         </li>
-                    </ul>
+  </ul>
                 </li>
                 <li class="">
                     <a href="#copy-section"><i class="material-icons">date_range</i><span>Copy</span></a>
@@ -147,7 +147,7 @@
                 <li class="">
                     <a href="#calender-section"><i class="material-icons">library_books</i><span>Calendar</span></a>
                 </li>
-            </ul>
+            </ul>-->
         </nav>
         <!-- Page Content  -->
         <div id="content">
@@ -281,18 +281,18 @@
 
                 </div>
                 <div id="view-farmer-info-section" class="section">
-                    <h2>View Farmer Info</h2>
+                   <!-- <h2>View Farmer Info</h2>-->
                    
    
-                <div id="current-status-section" class="section">
+             <!--   <div id="current-status-section" class="section">
                     <h2>Current Status</h2>
                     <p>This is another current status section content.</p>
                 </div>
                 <div id="ui-element-section" class="section">
                     <h2>UI Element</h2>
                     <p>This is the UI element section content.</p>
-                </div>
-                <div id="orders-section" class="section">
+                </div>-->
+ <div id="orders-section" class="section">
                     <h2>Orders</h2>
                     <!DOCTYPE html>
 <html>
@@ -334,10 +334,10 @@
 </html>
 
                 </div>
-                <div id="tables-section" class="section">
+              <!--  <div id="tables-section" class="section">
                     <h2>Tables</h2>
                     <p>This is the tables section content.</p>
-                </div>
+                </div>-->
                 <div id="issue-fertilizer-section" class="section">
                     <h2>Issue Fertilizer</h2>
                     <div class="container mt-4">
@@ -357,14 +357,14 @@
 
                 </div>
                 </div>
-                <div id="copy-section" class="section">
+             <!--   <div id="copy-section" class="section">
                     <h2>Copy</h2>
                     <p>This is the copy section content.</p>
                 </div>
-                <div id="calender-section" class="section">
+               <div id="calender-section" class="section">
                     <h2>Calendar</h2>
                     <p>This is the calendar section content.</p>
-                </div>
+               </div> -->
             </div>
             <footer class="footer">
                 <div class="container-fluid">

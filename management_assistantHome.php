@@ -35,8 +35,8 @@
                 </li>
                 <li class="dropdown">
                     <a href="#field-visits-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">aspect_ratio</i><span>Field Visits</span></a>
-                    <ul class="collapse list-unstyled menu" id="field-visits-section">
+                        <i class="material-icons">aspect_ratio</i><span>Add Fertilizer Data</span></a>
+                 <!--   <ul class="collapse list-unstyled menu" id="field-visits-section">
                         <li>
                             <a href="#">View</a>
                         </li>
@@ -50,11 +50,11 @@
                             <a href="#">Delete</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown">
                     <a href="#view-farmer-info-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">apps</i><span>View Farmer Info</span></a>
-                    <ul class="collapse list-unstyled menu" id="view-farmer-info-section">
+                        <i class="material-icons">apps</i><span>View Fertilizer Info</span></a>
+                  <!--  <ul class="collapse list-unstyled menu" id="view-farmer-info-section">
                         <li>
                             <a href="#">Page 1</a>
                         </li>
@@ -65,11 +65,11 @@
                             <a href="#">Page 3</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown">
                     <a href="#current-status-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">equalizer</i><span>Current Status</span></a>
-                    <ul class="collapse list-unstyled menu" id="current-status-section">
+                        <i class="material-icons">equalizer</i><span>Stock Review</span></a>
+                   <!-- <ul class="collapse list-unstyled menu" id="current-status-section">
                         <li>
                             <a href="#">Page 1</a>
                         </li>
@@ -80,8 +80,8 @@
                             <a href="#">Page 3</a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>-->
+               <!-- <li class="dropdown">
                     <a href="#ui-element-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">extension</i><span>UI Element</span></a>
                     <ul class="collapse list-unstyled menu" id="ui-element-section">
@@ -95,10 +95,10 @@
                             <a href="#">Page 3</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown">
                     <a href="#orders-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">border_color</i><span>Orders</span></a>
+                        <i class="material-icons">border_color</i><span>Check Orders</span></a>
                     <ul class="collapse list-unstyled menu" id="orders-section">
                         <li>
                             <a href="#">Page 1</a>
@@ -111,7 +111,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+               <!-- <li class="dropdown">
                     <a href="#tables-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">grid_on</i><span>Tables</span></a>
                     <ul class="collapse list-unstyled menu" id="tables-section">
@@ -125,7 +125,7 @@
                             <a href="#">Page 3</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 <li class="dropdown">
                     <a href="#issue-fertilizer-section" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="material-icons">content_copy</i><span>Issue Fertilizer</span></a>
@@ -141,13 +141,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="">
+               <!-- <li class="">
                     <a href="#copy-section"><i class="material-icons">date_range</i><span>Copy</span></a>
                 </li>
                 <li class="">
                     <a href="#calender-section"><i class="material-icons">library_books</i><span>Calendar</span></a>
                 </li>
-            </ul>
+            </ul>-->
         </nav>
         <!-- Page Content  -->
         <div id="content">
@@ -212,7 +212,7 @@
                     <p>This is the current status section content.</p>
                 </div>
                 <div id="field-visits-section" class="section">
-                    <h2>Field Visits</h2>
+                    <h2>Add Fertilizer Data</h2>
                     <!DOCTYPE html>
 <html>
 <head>
@@ -229,7 +229,7 @@
             echo '<div class="alert alert-success">Data saved successfully!</div>';
         }
         ?>
-       <!-- ... (existing code) ... -->
+      
 <form method="POST" action="fertiTypeVal.php">
     <div class="form-group">
         <label for="urea_quantity">Quantity per unit - Urea:</label>
@@ -254,7 +254,7 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<!-- ... (existing code) ... -->
+
 
     </div>
 
@@ -266,7 +266,7 @@
 
                 </div>
                 <div id="view-farmer-info-section" class="section">
-                    <h2>View Farmer Info</h2>
+                    <h2>View Fertilizer Info</h2>
                     <!DOCTYPE html>
 <html>
 <head>
@@ -323,7 +323,22 @@
                 </div>
                 <div id="current-status-section" class="section">
                     <h2>Current Status</h2>
-                    <p>This is another current status section content.</p>
+                    
+<div class="container mt-5">
+  <h2>GN Division Report</h2>
+  <div class="form-group mt-3">
+    <label for="gnDivision">Select GN Division:</label>
+    <select class="form-control" id="gnDivision">
+      <option value="Overall">Overall</option>
+      <option value="xxx-1">xxx-1</option>
+      <option value="yyy-2">yyy-2</option>
+      <option value="zzz-3">zzz-3</option>
+    </select>
+  </div>
+  
+  <!-- Div to display the details -->
+  <div id="reportDetails"></div>
+</div>
                 </div>
                 <div id="ui-element-section" class="section">
                     <h2>UI Element</h2>
@@ -411,6 +426,53 @@
             });
         });
     </script>
+    <script>
+$(document).ready(function(){
+  $("#gnDivision").change(function(){
+    var gnDivision = $(this).val();
+    if (gnDivision === "Overall") {
+      showOverallReport();
+    } else {
+      showGNDivisionDetails(gnDivision);
+    }
+  });
+  
+  function showOverallReport() {
+    // Display loading indicator while fetching data
+    $("#reportDetails").html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
+    
+    // AJAX call to fetch the overall details
+    $.ajax({
+      url: "fetch_overall_details.php",
+      method: "POST",
+      success: function(response) {
+        $("#reportDetails").html(response);
+      },
+      error: function() {
+        $("#reportDetails").html('<div class="text-danger">Error occurred while fetching data.</div>');
+      }
+    });
+  }
+  
+  function showGNDivisionDetails(gnDivision) {
+    // Display loading indicator while fetching data
+    $("#reportDetails").html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
+    
+    // AJAX call to fetch and display the GN division details
+    $.ajax({
+      url: "fetch_gn_division_details.php",
+      method: "POST",
+      data: { gnDivision: gnDivision },
+      success: function(response){
+        $("#reportDetails").html(response);
+      },
+      error: function() {
+        $("#reportDetails").html('<div class="text-danger">Error occurred while fetching data.</div>');
+      }
+    });
+  }
+});
+</script>
 </body>
 
 </html>
