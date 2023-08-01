@@ -40,7 +40,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="telephone" class="form-label">Telephone:</label>
-                                <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Telephone" name="telephone" required>
+                                <input type="text" class="form-control form-control-lg bg-light fs-6 validatePhoneNumber" placeholder="Telephone" name="telephone" required>
                             </div>
                             <button type="button" class="btn btn-primary next-btn">Next</button>
                         </div>
@@ -132,7 +132,8 @@
             }
         });
     </script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="js/fRegStep2Validation.js"></script>
 </body>
 </html>
 

@@ -28,6 +28,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION["username"] = $username;
 
+            if ($userType == "AR_Officer") {
+                $sql = "SELECT staffID FROM staffmember WHERE userID = '$username' ";
+
+                $result = mysqli_query($con, $sql);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $staffID = $row["staffID"];
+
+                    $sql = "SELECT gn_divisionID FROM ar_officer WHERE staffID = '$staffID' ";
+                   
+                    $result = mysqli_query($con, $sql);
+
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_assoc($result);
+                        $gnDivisionID = $row["gn_divisionID"];
+                        $_SESSION["gn_divisionID"] = $gn_divisionID;
+                        $sql = "SELECT gnDivisionName FROM gn_division WHERE gn_divisionID = '$gnDivisionID' ";
+
+                        $result = mysqli_query($con, $sql);
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
+                            $gnDivisionName = $row["gnDivisionName"];
+
+                            $_SESSION["gnDivisionName"] = $gnDivisionName;
+
+                        }
+                    }
+                }
+            }
+
             switch ($userType) {
                 case "farmer":
                     header("Location: farmerHome.php");
@@ -45,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         header("Location: management_assistantHome.php");
                         break;
                     
-                default:
+                    default:
                     header("Location: login.php?error=Invalid User Type");
                     break;
             }
@@ -58,6 +90,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-
-
-

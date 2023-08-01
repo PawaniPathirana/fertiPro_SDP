@@ -42,14 +42,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         mysqli_close($con);
-
-        // Display the results
-        echo "<h2>Total Fertilizer Quantities for GN Division:</h2>";
-        //echo "<p>GN Division ID: $gnDivisionID</p>";
-        echo "<p>GN Division Name: $selectedDivision</p>";
-        echo "<p>Total Quantity of Urea: {$fertilizerQuantities['urea']}</p>";
-        echo "<p>Total Quantity of MOP: {$fertilizerQuantities['mop']}</p>";
-        echo "<p>Total Quantity of TSP: {$fertilizerQuantities['tsp']}</p>";
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Quantities</title>
+</head>
+<body>
+
+<!-- Display the results -->
+<div style="padding: 20px;">
+    <h2 style="color: #103cbe;">Total Fertilizer Quantities for GN Division:</h2>
+    <p><strong>GN Division Name:</strong> <?php echo $selectedDivision; ?></p>
+    <p><strong>Total Quantity of Urea:</strong> <?php echo $fertilizerQuantities['urea']; ?></p>
+    <p><strong>Total Quantity of MOP:</strong> <?php echo $fertilizerQuantities['mop']; ?></p>
+    <p><strong>Total Quantity of TSP:</strong> <?php echo $fertilizerQuantities['tsp']; ?></p>
+</div>
+
+</body>
+</html>

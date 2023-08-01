@@ -126,13 +126,14 @@ button:hover {
 }
 </style>
         </style>
+        
   </head>
   <body>
     <!-- Navbar -->
     
 <nav class="navbar navbar-expand-lg bg-primary bg-dark navbar-dark py-3 fixed-top">
   <div class="container">
-    <a href="#" class="navbar-brand">Agrarian Service Center Srawasthipura</a>
+    <a href="#" class="navbar-brand" >Agrarian Service Center Srawasthipura</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
       <span class="navbar-toggler-icon"></span>
@@ -140,9 +141,10 @@ button:hover {
 
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a href="#" class="nav-link">Home</a>
-        </li>
+      <li class="nav-item">
+  <a href="#" class="nav-link ">Home</a>
+</li>
+
         <li class="nav-item">
           <a href="#aboutUs" class="nav-link">About Us</a>
         </li>
@@ -177,7 +179,7 @@ button:hover {
     
   <img class="img-fluid w-100" src="https://e0.pxfuel.com/wallpapers/379/496/desktop-wallpaper-rice-field-paddy.jpg" alt="Web Developer" style="max-height: 400px;">
   <div class="container position-absolute top-50 start-50 translate-middle">
-    <h1 class="text-black fw-bold">Introducing a Revolutionary Approach</h1>
+    <h1 class="text-black fw-bold" >Introducing a Revolutionary Approach</h1>
     <p class="lead my-4 text-white fw-bold">
     "Empowering Paddy Farmers with Precision Fertilizer Distribution for Bountiful Harvests"
     </p>

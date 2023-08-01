@@ -44,7 +44,7 @@
                     <div class="mb-3">
                         <label for="gn_division" class="form-label">GN Division:</label>
                         <select class="form-control form-control-lg bg-light fs-6" id="gn_division" name="gnDivision" required>
-                            <option value="">Select GN Division</option>
+                          <option value="">Select GN Division</option>
                             <option value="xxx-1">xxx-1</option>
                             <option value="yyy-2">yyy-2</option>
                             <option value="zzz-3">zzz-3</option>

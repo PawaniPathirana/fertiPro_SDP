@@ -37,7 +37,7 @@ if ($result_gn_division->num_rows > 0) {
         $time = date("H:i:s");
 
         $report = "Stock Review of the $gnDivisionName\n\n"
-            . "Quantity of Urea: $Quantity_of_Urea\n"
+            . "Quantity of Urea: $Quantity_of_Urea \n"
             . "Quantity of T.S.P: $Quantity_ofTSP\n"
             . "Quantity of M.O.P: $Quantity_ofMOP\n"
             . "Total Quantity: $TotalQuantity\n\n"

@@ -108,7 +108,9 @@ if ($result->num_rows === 0) {
             $totalPriceOfOrder,
             $arOfficerID,
             $farmerID
+            
         );
+        
         $stmt->execute();
         if ($stmt->affected_rows > 0) {
             echo "<p>Order placed successfully!</p>";

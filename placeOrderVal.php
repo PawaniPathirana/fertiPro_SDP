@@ -17,6 +17,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Save the GN Division and NIC in the session for use later
         $_SESSION['gnDivision'] = $gnDivision;
         $_SESSION['nic'] = $nic;
+        $sql = "SELECT gn_division_id FROM gn_division WHERE gnDivisionName = ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $gnDivision);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $gnDivisionID = $row["gn_division_id"];
+
+                // Get the AR Officer ID based on gnDivisionID
+                $sql = "SELECT ar_officerID FROM ar_officer WHERE gn_division_id = ?";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("s", $gnDivisionID);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $arOfficerID = $row["ar_officerID"];
+                $ar_officerID = $_SESSION["ar_officerID"];
+
+                $_SESSION["ar_officerID"] = $ar_officerID;
     }
     // Check if the farmer exists and has eligibility status 'eligible'
     $sql = "SELECT * FROM fieldvisit WHERE gnDivision = ? AND farmerNIC = ? AND eligibilityStatus = 'eligible'";
@@ -25,10 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     $result = $stmt->get_result();
+    
 
     if ($result->num_rows === 0) {
         // The farmer does not exist or is not eligible
-        echo "<p>The farmer does not exist or is not eligible.</p>";
+        echo "<p style='text-align: center;'>The farmer does not exist or is not eligible.</p>";
     } else {
         // The farmer exists and is eligible
         $row = $result->fetch_assoc();
@@ -38,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Get the farmerID
         $farmerID = $row["farmerID"];
-
+        $_SESSION["farmerID"] = $farmerID;
         // Retrieve the field size from the farmers table
         $sql = "SELECT fieldSize FROM farmers WHERE farmerID = ?";
         $stmt = $con->prepare($sql);
@@ -49,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result->num_rows === 0) {
             // The farmer's field size is not available
-            echo "<p>Field size not available for the farmer.</p>";
+            echo "<p style='text-align: center;'>Field size not available for the farmer.</p>";
         } else {
             // Get the field size
             $row = $result->fetch_assoc();
@@ -64,22 +84,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             while ($row = $result->fetch_assoc()) {
                 $recommendedQuantity[$row["fertilizerType"]] = round($fieldSize * $row["quantityPerUnit"], 2);
             }
-           // session_start();
-           // $farmerID = $_SESSION['farmerID'];
-           // $arOfficerID= $_SESSION['ar_officerID'];
+            
             // Display the fertilizer calculator
-            echo "<h2>Fertilizer Calculator</h2>";
-            echo '<form method="POST" action="paw.php">';
+            echo "<div class='container d-flex justify-content-center align-items-center min-vh-100'>";
+            echo "<div class='row border rounded-5 p-3 bg-white shadow box-area'>";
+            echo "<div class='col-md-12 right-box'>";
+            echo "<div class='row align-items-center'>";
+            echo "<div class='header-text mb-5'>";
+            echo "<h2 style='color: #333; text-align: center;'>Fertilizer Calculator</h2>";
+            echo '<form method="POST" action="paw.php" style="text-align: center;">';
 
-
-
-            echo "<table class=\"table table-bordered\">
+            echo "<table class=\"table table-bordered\" style='width: 50%; margin: 0 auto; border-collapse: collapse;'>
 <thead>
 <tr>
-<th>Fertilizer Type</th>
-<th>Recommended Quantity</th>
-<th>Price per Unit</th>
-<th>Total Price for Recommended Quantity</th>
+<th style='padding: 8px; border: 1px solid #ddd;'>Fertilizer Type</th>
+<th style='padding: 8px; border: 1px solid #ddd;'>Recommended Quantity</th>
+<th style='padding: 8px; border: 1px solid #ddd;'>Price per Unit</th>
+<th style='padding: 8px; border: 1px solid #ddd;'>Total Price for Recommended Quantity</th>
 </tr>
 </thead>
 <tbody>";
@@ -100,10 +121,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $totalPriceOfOrder += $totalPriceForRecommendedQuantity;
 
                 echo "<tr>";
-                echo "<td>" . $fertilizerType . "</td>";
-                echo "<td>" . $quantity . " kg</td>";
-                echo "<td>Rs." . $pricePerUnit . "</td>";
-                echo "<td>Rs." . $totalPriceForRecommendedQuantity . "</td>";
+                echo "<td style='padding: 8px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
+                echo "<td style='padding: 8px; border: 1px solid #ddd;'>" . $quantity . " kg</td>";
+                echo "<td style='padding: 8px; border: 1px solid #ddd;'>Rs." . $pricePerUnit . "</td>";
+                echo "<td style='padding: 8px; border: 1px solid #ddd;'>Rs." . $totalPriceForRecommendedQuantity . "</td>";
                 echo "</tr>";
             }
 
@@ -111,15 +132,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </table>";
 
             // Display the total price of the order
-            echo "<h3>Total Price of the Order: " . $totalPriceOfOrder . "</h3>";
+            echo "<h3 style='text-align: center;'>Total Price of the Order: Rs " . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
-            
-            echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton'>Order</button>";
+            echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton' style='margin-top: 10px;'>Order</button>";
            
             echo "</form>";
-            echo '<form method="POST" action="changeOrderVal.php">';
-            echo "<button type='Submit' class='btn btn-primary' id='Change' name='orderButton'>Change The Order</button>";
+            echo '<form method="POST" action="paw3.php" style="text-align: center;">';
+            echo "<button type='Submit' class='btn btn-primary' id='Change' name='orderButton' style='margin-top: 10px;'>Change The Order</button>";
             echo "</form>";
 
             // Check if the "Order" button has been pressed
@@ -145,31 +165,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
                 $arOfficerID = $row["ar_officerID"];
+                $_SESSION["ar_officerID"] = $ar_officerID;
 
-                // Insert the order into the orders table
-                $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 
-                        priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param(
-                    "sssssssssss",
-                    $orderDate,
-                    $orderTime,
-                    $recommendedQuantity["Urea"],
-                    $recommendedQuantity["MOP"],
-                    $recommendedQuantity["TSP"],
-                    $pricePerUnit,
-                    $pricePerUnit,
-                    $pricePerUnit,
-                    $totalPriceOfOrder,
-                    $arOfficerID,
-                    $farmerID
-                );
-                $stmt->execute();
-
-                echo "<p>Order placed successfully!</p>";
+                            // Insert the order into the orders table
+                            $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 
+                            priceOfUrea, priceOfMOP, priceOfTSP, totalPrice, ar_officerID, farmerID)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bind_param(
+                        "sssssssssss",
+                        $orderDate,
+                        $orderTime,
+                        $recommendedQuantity["Urea"],
+                        $recommendedQuantity["MOP"],
+                        $recommendedQuantity["TSP"],
+                        $pricePerUnit,
+                        $pricePerUnit,
+                        $pricePerUnit,
+                        $totalPriceOfOrder,
+                        $arOfficerID,
+                        $farmerID
+                    );
+                    $stmt->execute();
+                    
+                    echo "<p style='text-align: center;'>Order placed successfully!</p>";
+                }
             }
         }
     }
-}
-?>
+    ?>
+    
