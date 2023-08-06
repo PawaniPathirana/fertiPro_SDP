@@ -23,7 +23,7 @@
 <?php
 session_start();
 $farmerID = $_SESSION['farmerID'];
-$arOfficerID=$_SESSION["ar_officerID"] ;
+$arOfficerID = $_SESSION["ar_officerID"];
 ?>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -31,6 +31,7 @@ $arOfficerID=$_SESSION["ar_officerID"] ;
 
 <?php
 // Connect to the database
+// Replace with your database connection details
 include "dbConn.php";
 //session_start();
 
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // Get the unit price of each fertilizer
-$query = 'SELECT fertilizerType, quantityPerUnit, unitPrice FROM fertilizer_data';
+$query = "SELECT fertilizerType, quantityPerUnit, unitPrice FROM fertilizer_data WHERE fertilizerType IN ('Urea', 'MOP', 'TSP')";
 $result = mysqli_query($con, $query);
 
 // Store the unit prices in an associative array for easier access
@@ -80,16 +81,12 @@ $_SESSION["totalPrice"] = $totalPrice1;
 
 // Display the results
 echo '<form method="POST" action="paw2.php">';
-
-//session_start();
 $farmerID = $_SESSION['farmerID'];
-//$ar_officerID=$_SESSION["ar_officerID"] ;
-$arOfficerID=$_SESSION["ar_officerID"] ;
+$arOfficerID = $_SESSION["ar_officerID"];
 
 echo '<table class="table table-bordered">
 <thead>
 <tr>
-<th>Fertilizer</th>
 <th>Quantity</th>
 <th>Unit Price</th>
 <th>Price</th>
@@ -123,3 +120,9 @@ echo '<table class="table table-bordered">
 </table>';
 echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton'>Order</button>";
 echo "</form>";
+
+mysqli_close($con);
+?>
+</body>
+</html>
+

@@ -20,6 +20,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--google material icon-->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+         body {
+            background-image: url("https://img.freepik.com/free-photo/large-green-rice-field-with-green-rice-plants-rows_181624-28862.jpg?size=626&ext=jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        </style>
 </head>
 
 <body>
@@ -226,9 +234,16 @@
                     
                 </div>
                 <div id="field-visits-section" class="section">
-    <h2>Field Visits</h2>
+  
+   
+    <div class="container d-flex justify-content-center align-items-center  width: 1500px min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area"  >
+            <div class="col-md-12 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-5">
     <form action="fieldVisitsVal.php" method="POST" class="smaller-form">
         <div class="form-group">
+        <h2>Field Visits</h2>
             <label for="officer_name">Employee ID:</label>
             <input type="text" class="form-control form-control-sm" id="officer_name" name="officer_name" style="width: 500px;">
         </div>
@@ -266,10 +281,10 @@
             <input type="text" class="form-control form-control-sm" id="gn_division" name="gn_division" style="width: 500px;">
         </div>
 
-        <input type="submit" class="btn btn-primary btn-sm" value="Submit">
+        <input type="submit" class="tn btn-lg btn-primary w-100 fs-6" value="Submit">
     </form>
 </div>
-
+</div></div></div></div></div>
 
 <!-- Include the required libraries -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">

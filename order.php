@@ -6,6 +6,15 @@ if ($con === false) {
     die("Connection error");
 }
 
+// Initialize variables to default values
+$selectedDivision = "";
+$fertilizerQuantities = array(
+    "urea" => 0,
+    "mop" => 0,
+    "tsp" => 0
+);
+$gnDivisionID = 0;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($con) {
         $selectedDivision = $_POST["gnDivision"];
@@ -25,19 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Retrieve the total quantity of each fertilizer for each relevant ar_officerID
-        $fertilizerQuantities = array(
-            "urea" => 0,
-            "mop" => 0,
-            "tsp" => 0
-        );
-
         foreach ($arOfficerIDs as $arOfficerID) {
             $query = "SELECT quantityOfUrea, quantityOfMOP, quantityOfTSP FROM orders WHERE ar_officerID = $arOfficerID";
             $result = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $fertilizerQuantities["urea"] += $row["quantityOfUrea"];
-                $fertilizerQuantities["mop"] += $row["quantityOfMOP"];
-                $fertilizerQuantities["tsp"] += $row["quantityOfTSP"];
+            if ($result->num_rows > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $fertilizerQuantities["urea"] += $row["quantityOfUrea"];
+                    $fertilizerQuantities["mop"] += $row["quantityOfMOP"];
+                    $fertilizerQuantities["tsp"] += $row["quantityOfTSP"];
+                }
             }
         }
 
@@ -73,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertQuery = "INSERT INTO delivered_order_arofficer (DO_ID, date, time, AR_officerID) VALUES (NULL, '$currentDate', '$currentTime', $arOfficerID)";
             if ($con->query($insertQuery) === TRUE) {
                 // Success message for each insertion
+                // Success message for each insertion
                 echo "New record inserted into delivered_order_arofficer for AR Officer ID: $arOfficerID<br>";
             } else {
                 echo "Error: " . $insertQuery . "<br>" . $con->error;
@@ -81,6 +87,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Display a success message
         echo "<p>Total fertilizer quantities successfully issued!</p>";
+
+        // Calculate the total fertilizer quantity from the order
+        $totalOrderedUrea = $fertilizerQuantities['urea'];
+        $totalOrderedMOP = $fertilizerQuantities['mop'];
+        $totalOrderedTSP = $fertilizerQuantities['tsp'];
+
+        // Retrieve the current stock quantity from the initialStock table
+        /*$query = "SELECT quantityOfUrea, quantityOfMOP, quantityOfTSP, totalQuantity FROM initialstock WHERE ID = 1";
+        $result = mysqli_query($con, $query);
+        $row = mysqli_fetch_assoc($result);
+        
+        // Calculate the updated stock quantity after processing the order
+        $updatedUreaStock = $row['quantityOfUrea'] - $totalOrderedUrea;
+        $updatedMOPStock = $row['quantityOfMOP'] - $totalOrderedMOP;
+        $updatedTSPStock = $row['quantityOfTSP'] - $totalOrderedTSP;
+        $updatedTotalStock = $row['totalQuantity'] - ($totalOrderedUrea + $totalOrderedMOP + $totalOrderedTSP);
+
+        // Update the initialStock table with the new stock quantities
+        $updateQuery = "UPDATE initialstock SET quantityOfUrea = $updatedUreaStock, quantityOfMOP = $updatedMOPStock, quantityOfTSP = $updatedTSPStock, totalQuantity = $updatedTotalStock WHERE ID = 1";
+*/
+       /* if ($con->query($updateQuery) === TRUE) {
+            echo "Stock quantities updated successfully.";
+        } else {
+            echo "Error updating initialStock: " . $con->error;
+        }*/
     }
 }
 ?>

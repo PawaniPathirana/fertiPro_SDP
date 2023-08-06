@@ -6,7 +6,7 @@ session_start();
 if ($con === false) {
     die("Connection error");
 }
-
+date_default_timezone_set('Asia/Colombo');
 // Check if the form has been submitted before accessing $_POST values
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 

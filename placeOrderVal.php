@@ -33,9 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
                 $arOfficerID = $row["ar_officerID"];
-                $ar_officerID = $_SESSION["ar_officerID"];
-
-                $_SESSION["ar_officerID"] = $ar_officerID;
+                $_SESSION["ar_officerID"] = $arOfficerID;
     }
     // Check if the farmer exists and has eligibility status 'eligible'
     $sql = "SELECT * FROM fieldvisit WHERE gnDivision = ? AND farmerNIC = ? AND eligibilityStatus = 'eligible'";
@@ -119,6 +117,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $totalPriceForRecommendedQuantity = round($quantity * $pricePerUnit, 2);
                 $totalPriceOfOrder += $totalPriceForRecommendedQuantity;
+                // Calculate the recommended quantities of each fertilizer
+$recommendedQuantity = array();
+$sql = "SELECT * FROM fertilizer_data";
+$stmt = $con->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $recommendedQuantity[$row["fertilizerType"]] = round($fieldSize * $row["quantityPerUnit"], 2);
+}
+
+// Save the recommended quantities in sessions
+$_SESSION["recommendedQuantity"] = $recommendedQuantity;
 
                 echo "<tr>";
                 echo "<td style='padding: 8px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
@@ -135,11 +145,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<h3 style='text-align: center;'>Total Price of the Order: Rs " . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
-            echo "<button type='submit' class='btn btn-primary' id='orderButton' name='orderButton' style='margin-top: 10px;'>Order</button>";
+            echo "<button type='submit' class='btn btn-lg btn-primary w-100 fs-6' id='orderButton' name='orderButton' style='margin-top: 10px;'>Order</button>";
            
             echo "</form>";
             echo '<form method="POST" action="paw3.php" style="text-align: center;">';
-            echo "<button type='Submit' class='btn btn-primary' id='Change' name='orderButton' style='margin-top: 10px;'>Change The Order</button>";
+            echo "<button type='Submit' class='btn btn-lg btn-primary w-100 fs-6' id='Change' name='orderButton' style='margin-top: 10px;'>Change The Order</button>";
             echo "</form>";
 
             // Check if the "Order" button has been pressed
@@ -165,7 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
                 $arOfficerID = $row["ar_officerID"];
-                $_SESSION["ar_officerID"] = $ar_officerID;
+                $_SESSION["ar_officerID"] = $arOfficerID;
 
                             // Insert the order into the orders table
                             $sql = "INSERT INTO orders (orderDate, orderTime, quantityOfUrea, quantityOfMOP, quantityOfTSP, 

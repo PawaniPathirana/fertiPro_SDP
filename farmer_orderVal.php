@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Retrieve form inputs
     $farmerNIC = $_POST["farmerNIC"];
     $gnDivision = $_POST["gnDivision"];
-
+    date_default_timezone_set('Asia/Colombo');
     // Retrieve farmerID from the farmers table based on NIC and GN division
     $sql = "SELECT farmerID FROM farmers WHERE NIC = '$farmerNIC' ";
     $result = $con->query($sql);

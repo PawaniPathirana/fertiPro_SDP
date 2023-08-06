@@ -71,10 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: devOfficerHome.php");
                     break;
                 case "AR_Officer":
-                    header("Location: AR_OfficerHome.php");
+                    header("Location: ARHome1.php");
                     break;
                     case "management_assistant":
-                        header("Location: management_assistantHome.php");
+                        header("Location: MAHome1.php");
                         break;
                     
                     default:

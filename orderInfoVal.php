@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Display the results -->
 <div style="padding: 20px;">
-    <h2 style="color: #103cbe;">Total Fertilizer Quantities for GN Division:</h2>
+    <h2 style="color: #103cbe;">Total Fertilizer Quantities required for The GN Division:</h2>
     <p><strong>GN Division Name:</strong> <?php echo $selectedDivision; ?></p>
     <p><strong>Total Quantity of Urea:</strong> <?php echo $fertilizerQuantities['urea']; ?></p>
     <p><strong>Total Quantity of MOP:</strong> <?php echo $fertilizerQuantities['mop']; ?></p>
