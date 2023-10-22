@@ -81,7 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $con->query($sql_insert_order);
                         //date_default_timezone_set("Asia/Colombo");
                         // Create a report
-                        $report = "Order successfully processed!\n\n"
+                        
+                        $report = 
+                       
+                        "Order successfully processed!\n\n"
                         . "Farmer NIC: $farmerNIC\n"
                         . "GN Division: $gnDivision\n"
                         . "Quantity of Urea: $quantityOfUrea\n"
@@ -93,13 +96,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         . "Price for T.S.P: $priceOfTSP\n"
                         . "Total Price: $totalPrice\n\n"
                         . "Report generated on: $date, $time";
-           
+                        
            $report_html = nl2br($report);
            
-           echo $report_html;
-                        echo "<button onclick='window.print()'>Print</button>";
+         //  echo $report_html;
+                      //  echo "<button onclick='window.print()'>Print</button>";
 
-                        echo "<a href='report.php?report=$report'>Download PDF</a>";
+                       // echo "<a href='report.php?report=$report'>Download PDF</a>";
+                        
                         // Redirect to a different page with the report
                       //  header("Location: report.php?report=$report");
 
@@ -127,3 +131,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $con->close();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (your existing head content) -->
+    <style>
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* To center vertically */
+            text-align: center; /* To center text content */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Order Successfully Processed!</h1>
+        <p>Farmer NIC: <?php echo $farmerNIC; ?></p>
+        <p>GN Division: <?php echo $gnDivision; ?></p>
+        <p>Quantity of Urea: <?php echo $quantityOfUrea; ?></p>
+        <p>Quantity of M.O.P: <?php echo $quantityOfMOP; ?></p>
+        <p>Quantity of T.S.P: <?php echo $quantityOfTSP; ?></p>
+        <p>Total Quantity: <?php echo $totalQuantity1; ?></p>
+        <p>Price for Urea: <?php echo $priceOfUrea; ?></p>
+        <p>Price for M.O.P: <?php echo $priceOfMOP; ?></p>
+        <p>Price for T.S.P: <?php echo $priceOfTSP; ?></p>
+        <p>Total Price: <?php echo $totalPrice; ?></p>
+        <p>Report generated on: <?php echo $date; ?>, <?php echo $time; ?></p>
+        <button onclick="window.print()">Print</button>
+        <a href="report.php?report=<?php echo urlencode($report); ?>">Download PDF</a>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

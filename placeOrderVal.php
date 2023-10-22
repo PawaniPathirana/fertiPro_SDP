@@ -92,13 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<h2 style='color: #333; text-align: center;'>Fertilizer Calculator</h2>";
             echo '<form method="POST" action="paw.php" style="text-align: center;">';
 
-            echo "<table class=\"table table-bordered\" style='width: 50%; margin: 0 auto; border-collapse: collapse;'>
+            echo "<table class=\"table table-bordered\" style='width: 70%; margin: 0 auto; border-collapse: collapse;'>
 <thead>
 <tr>
-<th style='padding: 8px; border: 1px solid #ddd;'>Fertilizer Type</th>
-<th style='padding: 8px; border: 1px solid #ddd;'>Recommended Quantity</th>
-<th style='padding: 8px; border: 1px solid #ddd;'>Price per Unit</th>
-<th style='padding: 8px; border: 1px solid #ddd;'>Total Price for Recommended Quantity</th>
+<th style='padding: 12px; border: 1px solid #ddd;'>Fertilizer Type</th>
+<th style='padding: 12px; border: 1px solid #ddd;'>Recommended Quantity</th>
+<th style='padding: 12px; border: 1px solid #ddd;'>Price per Unit</th>
+<th style='padding: 12px; border: 1px solid #ddd;'>Total Price for Recommended Quantity</th>
 </tr>
 </thead>
 <tbody>";
@@ -131,10 +131,10 @@ while ($row = $result->fetch_assoc()) {
 $_SESSION["recommendedQuantity"] = $recommendedQuantity;
 
                 echo "<tr>";
-                echo "<td style='padding: 8px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
-                echo "<td style='padding: 8px; border: 1px solid #ddd;'>" . $quantity . " kg</td>";
-                echo "<td style='padding: 8px; border: 1px solid #ddd;'>Rs." . $pricePerUnit . "</td>";
-                echo "<td style='padding: 8px; border: 1px solid #ddd;'>Rs." . $totalPriceForRecommendedQuantity . "</td>";
+                echo "<td style='padding: 12px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
+                echo "<td style='padding: 12px; border: 1px solid #ddd;'>" . $quantity . " kg</td>";
+                echo "<td style='padding: 12px; border: 1px solid #ddd;'>Rs." . $pricePerUnit . "</td>";
+                echo "<td style='padding: 12px; border: 1px solid #ddd;'>Rs." . $totalPriceForRecommendedQuantity . "</td>";
                 echo "</tr>";
             }
 
@@ -145,7 +145,7 @@ $_SESSION["recommendedQuantity"] = $recommendedQuantity;
             echo "<h3 style='text-align: center;'>Total Price of the Order: Rs " . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
-            echo "<button type='submit' class='btn btn-lg btn-primary w-100 fs-6' id='orderButton' name='orderButton' style='margin-top: 10px;'>Order</button>";
+            echo "<button type='submit' class='btn btn-lg btn-primary w-100 fs-6' id='orderButton' name='orderButton' style='margin-top: 10px;'>Confirm Order</button>";
            
             echo "</form>";
             echo '<form method="POST" action="paw3.php" style="text-align: center;">';

@@ -31,7 +31,7 @@ $arOfficerID = $_SESSION["ar_officerID"];
 
 <?php
 // Connect to the database
-// Replace with your database connection details
+
 include "dbConn.php";
 //session_start();
 

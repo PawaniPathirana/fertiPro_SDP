@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>cms dashboard
+        <title>AR Home
 		</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,6 +25,12 @@
 	<!--google material icon-->
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet">
+      <style>
+.top-navbar.navbar-expand-lg {
+    background-color: #0802A3 !important;
+}
+</style>
+
   </head>
   <body>
   
@@ -178,16 +184,16 @@
                                </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#">You have 5 new messages</a>
+                                        <a href="#"></a>
                                     </li>
                                     <li>
-                                        <a href="#">You're now friend with Mike</a>
+                                        <a href="#"></a>
                                     </li>
                                     <li>
-                                        <a href="#">Wish Mary on her birthday!</a>
+                                        <a href="#"></a>
                                     </li>
                                     <li>
-                                        <a href="#">5 warnings in Server Console</a>
+                                        <a href="#"></a>
                                     </li>
                                   
                                 </ul>
@@ -220,7 +226,7 @@
 			
 			<div class="main-content">
             <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="row border rounded-5 p-3 bg-white shadow box-area" style="width: 700px;">
+    <div class="row border rounded-5 p-4 bg-white shadow box-area" style="width: 800px;">
         <div class="col-md-12 right-box">
             <div class="row align-items-center">
             </div>
