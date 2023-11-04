@@ -254,6 +254,7 @@
                     
                     <th>Fertilizer Type</th>
                     <th>Quantity per Unit</th>
+                    <th>Unit Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -271,6 +272,8 @@
                        
                         echo '<td>' . $row['fertilizerType'] . '</td>';
                         echo '<td>' . $row['quantityPerUnit'] . '</td>';
+                        echo '<td>' . $row['unitPrice'] . '</td>';
+
                         echo '<td><a href="fertiTypeDelVal.php?action=delete&id=' . $row['ID'] . '">Delete</a> | ';
                         echo '<a href="edit_data.php?id=' . $row['ID'] . '">Edit</a></td>';
                         echo '</tr>';

@@ -89,16 +89,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div class='col-md-12 right-box'>";
             echo "<div class='row align-items-center'>";
             echo "<div class='header-text mb-5'>";
-            echo "<h2 style='color: #333; text-align: center;'>Fertilizer Calculator</h2>";
+            echo "<Br><Br>";
+            echo "<h2 style='color: #333; text-align: center;'>Fertilizer Details with Recommended Quantities </h2>";
+            echo "<Br><Br>";
             echo '<form method="POST" action="paw.php" style="text-align: center;">';
 
-            echo "<table class=\"table table-bordered\" style='width: 70%; margin: 0 auto; border-collapse: collapse;'>
+            echo "<table class=\"styled-table\" style='width: 70%; margin: 0 auto; border-collapse: collapse;'>
 <thead>
 <tr>
-<th style='padding: 12px; border: 1px solid #ddd;'>Fertilizer Type</th>
-<th style='padding: 12px; border: 1px solid #ddd;'>Recommended Quantity</th>
-<th style='padding: 12px; border: 1px solid #ddd;'>Price per Unit</th>
-<th style='padding: 12px; border: 1px solid #ddd;'>Total Price for Recommended Quantity</th>
+<th style='padding: 14px; border: 1px solid #ddd;'>Fertilizer Type</th>
+<th style='padding: 14px; border: 1px solid #ddd;'>Recommended Quantity</th>
+<th style='padding: 14px; border: 1px solid #ddd;'>Price per Unit</th>
+<th style='padding: 14px; border: 1px solid #ddd;'>Total Price for Recommended Quantity</th>
 </tr>
 </thead>
 <tbody>";
@@ -131,27 +133,32 @@ while ($row = $result->fetch_assoc()) {
 $_SESSION["recommendedQuantity"] = $recommendedQuantity;
 
                 echo "<tr>";
-                echo "<td style='padding: 12px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
-                echo "<td style='padding: 12px; border: 1px solid #ddd;'>" . $quantity . " kg</td>";
-                echo "<td style='padding: 12px; border: 1px solid #ddd;'>Rs." . $pricePerUnit . "</td>";
-                echo "<td style='padding: 12px; border: 1px solid #ddd;'>Rs." . $totalPriceForRecommendedQuantity . "</td>";
+                echo "<td style='padding: 15px; border: 1px solid #ddd;'>" . $fertilizerType . "</td>";
+                echo "<td style='padding: 15px; border: 1px solid #ddd;'>" . $quantity . " kg</td>";
+                echo "<td style='padding: 15px; border: 1px solid #ddd;'>Rs." . $pricePerUnit . "</td>";
+                echo "<td style='padding: 15px; border: 1px solid #ddd;'>Rs." . $totalPriceForRecommendedQuantity . "</td>";
                 echo "</tr>";
             }
 
             echo "</tbody>
 </table>";
-
+echo "<Br>";
             // Display the total price of the order
             echo "<h3 style='text-align: center;'>Total Price of the Order: Rs " . $totalPriceOfOrder . "</h3>";
 
             // Add the "Order" button
-            echo "<button type='submit' class='btn btn-lg btn-primary w-100 fs-6' id='orderButton' name='orderButton' style='margin-top: 10px;'>Confirm Order</button>";
+         echo'   <div class="button-section">';
+            echo '<div class="button-container" style="display: flex; justify-content: center; margin-top: 10px;">';
+            echo "<button type='submit' class='btn1' id='orderButton' name='orderButton' style='margin-top: 10px;'>Confirm Order</button>";
            
             echo "</form>";
-            echo '<form method="POST" action="paw3.php" style="text-align: center;">';
-            echo "<button type='Submit' class='btn btn-lg btn-primary w-100 fs-6' id='Change' name='orderButton' style='margin-top: 10px;'>Change The Order</button>";
-            echo "</form>";
 
+            echo '<div style="margin-left: 10px; margin-right: 10px;"></div>'; 
+            echo '<form method="POST" action="paw3.php" style="text-align: center; class="btn1">';
+            echo "<button type='Submit' class='btn2' id='Change' name='orderButton' style='margin-top: 10px;'>Change The Order</button>";
+            echo "</form>";
+            
+echo '</div>';
             // Check if the "Order" button has been pressed
             if (isset($_POST["orderButton"])) {
                 // Get the current date and time
@@ -203,5 +210,97 @@ $_SESSION["recommendedQuantity"] = $recommendedQuantity;
             }
         }
     }
-    ?>
+    ?><!DOCTYPE html>
+    <html>
+    <head>
+        
+        <!-- Add your CSS styles and external scripts here, if needed -->
+        <style>
+            .styled-table{
+
+                border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+            .btn1{
+
+                
+               
+                display: inline-block;
+                outline: 0;
+                cursor: pointer;
+                border: none;
+                padding: 0 56px;
+                height: 45px;
+                line-height: 45px;
+                border-radius: 7px;
+                background-color: #0070f3;
+                color: white;
+                font-weight: 400;
+                font-size: 16px;
+                box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+                transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+                :hover{
+                    background: rgba(0,118,255,0.9);
+                    box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+                }
+                
+
+            }
+            .btn2{
+
+                
+               
+display: inline-block;
+outline: 0;
+cursor: pointer;
+border: none;
+padding: 0 56px;
+height: 45px;
+line-height: 45px;
+border-radius: 7px;
+background-color: #008000;
+color: white;
+font-weight: 400;
+font-size: 16px;
+box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+:hover{
+    background: rgba(0,118,255,0.9);
+    box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+
+}
+
+    .image-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .image-section img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+</style>
+
+        </style>
+    </head>
+    <body>
+        <br><br><br>
+    <div class="image-section">
+    
+    <img src="https://archives1.dailynews.lk/sites/default/files/news/2019/06/06/z_p02-Monsoon.jpg" alt="Image 1" width="240" height="150">
+    <img src="https://ifdc.org/wp-content/uploads/2020/08/NEPAL_Rice_AdobeStock_284381434_resize.jpg" alt="Image 3" width="200" height="150">
+    <img src="https://adaderanaenglish.s3.amazonaws.com/1683106705-fertilizer-6.jpg" alt="Image 2" width="200" height="150">
+   
+    </div>
+</body>
+
+
+    </html>
     

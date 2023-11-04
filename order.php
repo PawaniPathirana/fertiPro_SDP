@@ -58,9 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<h2>Total Fertilizer Quantities for GN Division:</h2>";
         echo "<p>GN Division ID: $gnDivisionID</p>";
         echo "<p>GN Division Name: $selectedDivision</p>";
-        echo "<p>Total Quantity of Urea: {$fertilizerQuantities['urea']}</p>";
-        echo "<p>Total Quantity of MOP: {$fertilizerQuantities['mop']}</p>";
-        echo "<p>Total Quantity of TSP: {$fertilizerQuantities['tsp']}</p>";
+        echo "<p>Total Quantity of Urea: {$fertilizerQuantities['urea']}kg</p>";
+        echo "<p>Total Quantity of MOP: {$fertilizerQuantities['mop']}kg</p>";
+        echo "<p>Total Quantity of TSP: {$fertilizerQuantities['tsp']}kg</p>";
 
         // Insert the total fertilizer quantities into the stock table
         $totalQuantity = $fertilizerQuantities["urea"] + $fertilizerQuantities["mop"] + $fertilizerQuantities["tsp"];
@@ -77,9 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($arOfficerIDs as $arOfficerID) {
             $insertQuery = "INSERT INTO delivered_order_arofficer (DO_ID, date, time, AR_officerID) VALUES (NULL, '$currentDate', '$currentTime', $arOfficerID)";
             if ($con->query($insertQuery) === TRUE) {
-                // Success message for each insertion
-                // Success message for each insertion
-                echo "New record inserted into delivered_order_arofficer for AR Officer ID: $arOfficerID<br>";
+                
+                echo "The required stock has been successfully issued for the AR Officer ID: $arOfficerID<br>";
             } else {
                 echo "Error: " . $insertQuery . "<br>" . $con->error;
             }

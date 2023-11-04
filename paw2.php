@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $orderTime = date("H:i:s");
 
     // Get the values from the sessions
-    $quantityUrea1 = $_SESSION['quantityUrea_n'] ?? 0;
-    $quantityMOP1 = $_SESSION['quantityMOP_n'] ?? 0;
-    $quantityTSP1 = $_SESSION['quantityTSP_n'] ?? 0;
+    $quantityUrea1 = $_SESSION['quantityUrea'] ?? 0;
+    $quantityMOP1 = $_SESSION['quantityMOP'] ?? 0;
+    $quantityTSP1 = $_SESSION['quantityTSP'] ?? 0;
     $priceUrea1 = $_SESSION["priceUrea_n"] ?? 0;
     $priceMOP1 = $_SESSION["priceMOP_n"] ?? 0;
     $priceTSP1 = $_SESSION["priceTSP_n"] ?? 0;
@@ -64,11 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Execute the statement and handle potential errors
     if ($stmt->execute()) {
-        // Display a success message
-        echo "<p>Order placed successfully!</p>";
+        // Display a success message in a JavaScript alert
+        echo '<script type="text/javascript">';
+        echo 'alert("Order placed successfully!");';
+        echo '</script>';
     } else {
-        // Display an error message
-        echo "<p>Error placing order: " . $stmt->error . "</p>";
+        // Display an error message if the insert query fails
+        echo '<script type="text/javascript">';
+        echo 'alert("Error placing order: ' . $stmt->error . '");';
+        echo '</script>';
     }
 }
 ?>

@@ -13,8 +13,31 @@
         padding: 10px;
         width: 95%;
         border-radius: 5px;
+        
     }
-   
+    body {
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://amazinglanka.com/wp/wp-content/uploads/2015/07/1098746.jpg');
+/* Replace 'your-image-url.jpg' with the actual URL of your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(8px); /* Adjust the '5px' value to control the amount of blur */
+        }
+        .box-area {
+            max-width: 600px; /* Adjust the max-width to your preferred size */
+            margin: 0 auto; /* Center the box horizontally */
+            padding: 20px; /* Add some padding to the box */
+        }
     </style>
 </head>
 <body>

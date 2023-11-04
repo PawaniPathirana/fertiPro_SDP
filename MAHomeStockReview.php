@@ -89,7 +89,7 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="MAHomeViewFerti.php" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="MAHomeViewFertilizerData.php" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					<i class="material-icons">apps</i><span>View Fertilizer Data</span></a>
                     <ul class="collapse list-unstyled menu" id="pageSubmenu2">
                         <li>
@@ -144,7 +144,7 @@
 			   
 			     <li class="dropdown">
                     <a href="MAHomeAddStock.php" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<i class="material-icons"  href="ARHome.php">content_copy</i><span>Add Stock</span></a>
+					<i class="material-icons"  href="MAHomeAddStock.php">content_copy</i><span>Add Stock</span></a>
                     <ul class="collapse list-unstyled menu" id="pageSubmenu7">
                         <li>
                         <a href="ARHome.php">Link to ARHome.php</a>
@@ -202,19 +202,7 @@
 								   <span class="notification">4</span>
                                </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#">You have 5 new messages</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">You're now friend with Mike</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Wish Mary on her birthday!</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">5 warnings in Server Console</a>
-                                    </li>
-                                  
+                                    
                                 </ul>
                             </li>
                             <li class="nav-item">

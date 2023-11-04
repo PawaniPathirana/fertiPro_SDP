@@ -1,4 +1,7 @@
+
 <?php
+
+
 include "dbConn.php";
 session_start();
 
@@ -54,20 +57,26 @@ if ($result->num_rows === 0) {
             $recommendedQuantity[$row["fertilizerType"]] = round($fieldSize * $row["quantityPerUnit"], 2);
         }
 
+        // Get the unit prices of each fertilizer
+        $unitPrices = array();
+        $sql = "SELECT fertilizerType, unitPrice FROM fertilizer_data";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $unitPrices[$row["fertilizerType"]] = $row["unitPrice"];
+        }
+
         // Calculate the total price of the order
         $totalPriceOfOrder = 0;
-        foreach ($recommendedQuantity as $fertilizerType => $quantity) {
-            $sql = "SELECT unitPrice FROM fertilizer_data WHERE fertilizerType = ?";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $fertilizerType);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $pricePerUnit = $row["unitPrice"];
 
-            $totalPriceForRecommendedQuantity = round($quantity * $pricePerUnit, 2);
-            $totalPriceOfOrder += $totalPriceForRecommendedQuantity;
-        }
+        // Calculate the price for each fertilizer type
+        $priceOfUrea = round($recommendedQuantity["Urea"] * $unitPrices["Urea"], 2);
+        $priceOfMOP = round($recommendedQuantity["MOP"] * $unitPrices["MOP"], 2);
+        $priceOfTSP = round($recommendedQuantity["TSP"] * $unitPrices["TSP"], 2);
+
+        // Calculate the total price
+        $totalPriceOfOrder = $priceOfUrea + $priceOfMOP + $priceOfTSP;
 
         // Insert the order into the orders table
         $orderDate = date("Y-m-d");
@@ -85,7 +94,7 @@ if ($result->num_rows === 0) {
         // Get the AR Officer ID based on gnDivisionID
         $sql = "SELECT ar_officerID FROM ar_officer WHERE gn_division_id = ?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("s", $gnDivisionID);
+        $stmt->bind_param("i", $gnDivisionID);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -102,21 +111,116 @@ if ($result->num_rows === 0) {
             $recommendedQuantity["Urea"],
             $recommendedQuantity["MOP"],
             $recommendedQuantity["TSP"],
-            $pricePerUnit,
-            $pricePerUnit,
-            $pricePerUnit,
+            $priceOfUrea, 
+            $priceOfMOP, 
+            $priceOfTSP,
             $totalPriceOfOrder,
             $arOfficerID,
             $farmerID
-            
         );
-        
-        $stmt->execute();
-        if ($stmt->affected_rows > 0) {
-            echo "<p>Order placed successfully!</p>";
+
+        if ($stmt->execute()) {
+            // Display a success message in JavaScript to show the hidden popup
+            echo '<script type="text/javascript">';
+            echo 'window.location.href = "#popup1";';
+            echo '</script>';
         } else {
-            echo "<p>Failed to place the order. Please try again.</p>";
+            // Display an error message if the insert query fails
+            echo "<p>Error placing order: " . $stmt->error . "</p>";
         }
+    
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+@media screen and (max-width: 700px) {
+    .box{
+        width: 70%;
+    }
+    .popup{
+        width: 70%;
+    }
+}
+.image-section {
+  position: absolute;
+  bottom: 20;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.image-section img {
+  margin: 0 10px;
+}
+</style>
+</head>
+<body>
+    
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Order Placed Successfully</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+           You have placed the order successfully!
+        </div>
+    </div>
+</div>
+
+<div class="image-section">
+    <img src="https://archives1.dailynews.lk/sites/default/files/news/2019/06/06/z_p02-Monsoon.jpg" alt="Image 1" width="230" height="150">
+    <img src="https://adaderanaenglish.s3.amazonaws.com/1683106705-fertilizer-6.jpg" alt="Image 2" width="200" height="150">
+    <img src="https://ifdc.org/wp-content/uploads/2020/08/NEPAL_Rice_AdobeStock_284381434_resize.jpg" alt="Image 3" width="200" height="150">
+</div>
+</body>
+</html>
+

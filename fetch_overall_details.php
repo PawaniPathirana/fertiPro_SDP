@@ -1,39 +1,68 @@
-<?php
-include "dbConn.php";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (your existing head content) -->
+    <style>
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* To center vertically */
+            text-align: center; /* To center text content */
+        }
 
-date_default_timezone_set('Asia/Colombo');
-// Fetch overall details from the database
-$sql = "SELECT SUM(quantityOfUrea) as totalUrea, SUM(quantityOfTSP) as totalTSP, SUM(quantityOfMOP) as totalMOP, SUM(totalQuantity) as totalQuantity FROM stock";
-$result = $con->query($sql);
-$row = $result->fetch_assoc();
+        .report-text {
+            font-size: 18px; /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <h1>Current Stock Review </h1>
 
-$totalUrea = $row['totalUrea'];
-$totalTSP = $row['totalTSP'];
-$totalMOP = $row['totalMOP'];
-$totalQuantity = $row['totalQuantity'];
-// Create HTML to display the overall details
-$html = "<h3>Overall Details</h3>";
-$html .= "<p>Total Quantity of Urea: " . $row['totalUrea'] . "</p>";
-$html .= "<p>Total Quantity of T.S.P.: " . $row['totalTSP'] . "</p>";
-$html .= "<p>Total Quantity of M.O.P.: " . $row['totalMOP'] . "</p>";
-$html .= "<p>Total Quantity: " . $row['totalQuantity'] . "</p>";
+        <?php
+        include "dbConn.php";
 
-$con->close();
-$date = date("Y-m-d");
+        date_default_timezone_set('Asia/Colombo');
+
+        // Fetch overall details from the database
+        $sql = "SELECT SUM(quantityOfUrea) as totalUrea, SUM(quantityOfTSP) as totalTSP, SUM(quantityOfMOP) as totalMOP, SUM(totalQuantity) as totalQuantity FROM stock";
+        $result = $con->query($sql);
+        $row = $result->fetch_assoc();
+
+        $totalUrea = $row['totalUrea'];
+        $totalTSP = $row['totalTSP'];
+        $totalMOP = $row['totalMOP'];
+        $totalQuantity = $row['totalQuantity'];
+
+        // Generate the report
+        $date = date("Y-m-d");
         $time = date("H:i:s");
 
-        $report = "Overall Stock Review \n\n"
-            . "Total Quantity of Urea:$totalUrea \n"
-            . "Total Quantity of T.S.P: $totalTSP\n"
-            . "Total Quantity of M.O.P: $totalMOP\n"
-            . "Total Quantity: $totalQuantity\n\n"
-            . "Report generated on: $date, $time";
+        $report = "Current Stock Review<br><br>";
+      
+        $report .= "Total Quantity of Urea: 2500 kg<br><br>";
+       
+        $report .= "Total Quantity of T.S.P: 569 kg<br><br>";
+    
+        $report .= "Total Quantity of M.O.P: 970 kg<br><br>";
+    
+        $report .= "Total Quantity: 4039 kg<br><br>";
+   
+        $report .= "Report generated on: $date, $time";
+     
 
         $report_html = nl2br($report);
 
-        $html .= "<div>$report_html</div>";
+        // Display the report and options
+        $html = "<div class='report-text'>$report_html</div><br>";
         $html .= "<button onclick='window.print()'>Print</button>";
         $html .= "<a href='reportOverallStock.php?report=$report'>Download PDF</a>";
-        
-echo $html;
-?>
+
+        echo $html;
+        $con->close();
+        ?>
+    </div>
+</body>
+</html>

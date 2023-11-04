@@ -194,6 +194,21 @@
                     </ul>
                 </li>
 				
+                <li class="dropdown">
+                    <a href="search.php" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					<i class="material-icons"  href="search.php">content_copy</i><span>Farmer Info</span></a>
+                    <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
                
             </ul>
 
@@ -213,7 +228,7 @@
                         <span class="material-icons">arrow_back_ios</span>
                     </button>
 					
-					<a class="navbar-brand" href="#"> Dashboard </a>
+					<a class="navbar-brand" href="#"> Management Assistant </a>
 					
                     <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -332,18 +347,24 @@ $con->close();
 </head>
 <body>
    
-    <h1>Farmers Information</h1>
-    <p>Number of Farmers Who Register With The System: <?php echo $num_farmers; ?></p>
-    <p>Number of Eligible Farmers: <?php echo $count_eligible; ?></p>
-    <p>Number of Not Eligible Farmers: <?php echo $count_not_eligible; ?></p>
-    <p>Number of Farmers Not Visited Yet by an Officer: <?php echo $count_not_visited; ?></p>
-
-    <!-- Add the canvas element for the pie chart -->
-    <div class="d-flex justify-content-center"></div>
-    <div id="pieChart" style="width: 800px; height: 800px;"></div> <!-- Updated chart size -->
+    <h1>Farmer Information</h1>
+    <div class="row">
+        <!-- Content Column -->
+        <div class="col-md-6">
+            <p>Number of Farmers Who Register With The System: <?php echo $num_farmers; ?></p>
+            <p>Number of Eligible Farmers: <?php echo $count_eligible; ?></p>
+            <p>Number of Not Eligible Farmers: <?php echo $count_not_eligible; ?></p>
+            <p>Number of Farmers Not Visited Yet by an Officer: <?php echo $count_not_visited; ?></p>
+        </div>
+        <!-- Graph Column -->
+        <div class="col-md-6">
+            <!-- Add the canvas element for the pie chart -->
+            <div class="d-flex justify-content-center"></div>
+            <div id="pieChart" style="width: 600px; height: 600px;"></div> <!-- Updated chart size -->
+        </div>
+    </div>
 
     <!-- JavaScript section for creating the pie chart -->
-    
     <script>
         // Load Google Charts API
         google.charts.load('current', {'packages':['corechart']});
@@ -370,15 +391,13 @@ $con->close();
             };
 
             // Instantiate and draw the pie chart
-         
             var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
             chart.draw(data, options);
-            
         }
     </script>
-    
 </body>
 </html>
+
 
     </div>
 
@@ -394,6 +413,7 @@ $con->close();
                                     <div class="streamline">
                                         <div class="sl-item sl-primary">
                                             <div class="sl-content">
+                                            <!DOCTYPE html>
                                             <!DOCTYPE html>
 <html>
 <head>
@@ -425,56 +445,16 @@ $con->close();
         die("Connection error");
     }
 
-    // SQL query to get the total prices of delivered orders for each division
-    $sql_delivered_orders = "
-        SELECT gn_division.gnDivisionName, SUM(orders.totalPrice) AS total_delivered_price
-        FROM gn_division
-        LEFT JOIN ar_officer ON gn_division.gn_division_id = ar_officer.gn_division_id
-        LEFT JOIN orders ON ar_officer.ar_officerID = orders.ar_officerID
-        LEFT JOIN delivered_orders ON orders.orderID = delivered_orders.orderID
-        GROUP BY gn_division.gn_division_id;
-    ";
-
-    // SQL query to get the total prices of not delivered orders for each division
-    $sql_not_delivered_orders = "
-        SELECT gn_division.gnDivisionName, SUM(orders.totalPrice) AS total_not_delivered_price
-        FROM gn_division
-        LEFT JOIN ar_officer ON gn_division.gn_division_id = ar_officer.gn_division_id
-        LEFT JOIN orders ON ar_officer.ar_officerID = orders.ar_officerID
-        LEFT JOIN delivered_orders ON orders.orderID = delivered_orders.orderID
-        WHERE delivered_orders.deliveredOrderID IS NULL
-        GROUP BY gn_division.gn_division_id;
-    ";
-
-    // Execute the queries and fetch the results
-    $result_delivered = $con->query($sql_delivered_orders);
-    $result_not_delivered = $con->query($sql_not_delivered_orders);
-
-    // Check if the queries were successful
-    if ($result_delivered === false || $result_not_delivered === false) {
-        die("Error executing the queries: " . $con->error);
-    }
-
-    $gnDivisions = array();
-    $totalDeliveredPrices = array();
-    $totalNotDeliveredPrices = array();
-
-    // Collect data for the graph
-    while ($row_delivered = $result_delivered->fetch_assoc()) {
-        $gnDivisions[] = $row_delivered["gnDivisionName"];
-        $totalDeliveredPrices[] = $row_delivered["total_delivered_price"];
-    }
-
-    while ($row_not_delivered = $result_not_delivered->fetch_assoc()) {
-        $totalNotDeliveredPrices[] = $row_not_delivered["total_not_delivered_price"];
-    }
+    $gnDivisions = ['Division xxx-1', 'Division yyy-2', 'Division zzz-3'];
+    $totalDeliveredPrices = [25000, 18000, 32000];
+    $totalNotDeliveredPrices = [8000, 12000, 5000];
     ?>
     
     <h2>Division Order Comparison</h2>
     <table>
         <tr>
             <th>GN Division</th>
-            <th>Total prices of  orders</th>
+            <th>Total prices of delivered orders</th>
             <th>Total prices of not delivered orders</th>
         </tr>
         <?php
@@ -490,7 +470,7 @@ $con->close();
 
     <!-- Chart.js script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <canvas id="myChart" width="100" height="100"></canvas>
+    <canvas id="myChart" width="400" height="200"></canvas>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -525,6 +505,7 @@ $con->close();
     </script>
 </body>
 </html>
+
 
 				</div>
 				  </div>

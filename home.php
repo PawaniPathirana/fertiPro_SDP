@@ -21,6 +21,25 @@
     <link rel="stylesheet" href="css/home.css" />
     <title>Agrarian Service Center Srawasthipura</title>
     <style>
+     .navbar.navbar-expand-lg .navbar-brand {
+    color: black !important;
+  }
+
+  /* Change the color of the text in the navbar to black */
+ 
+  /* Change the background color of the navbar to white */
+  .navbar.navbar-expand-lg.bg-dark {
+    background-color: white !important;
+  }
+
+  /* Change the color of the text in the navbar to black */
+  .navbar-dark .navbar-nav .nav-link {
+    color: black !important;
+  }
+
+
+
+
     .error{
 		background: #F2DEDE;
 		color: #A94442;
@@ -42,7 +61,8 @@
 .invalid input:required:invalid {
   background: #BE4C54;
 }
-
+.text-left {
+            text-align: left;}
 /* Mark valid inputs during .invalid state */
 .invalid input:required:valid {
   background: #17D654;
@@ -175,11 +195,11 @@ button:hover {
 
 
     <br><br><br>
-    <!-- Showcase -->
+    <!-- Showcasehttps://e0.pxfuel.com/wallpapers/379/496/desktop-wallpaper-rice-field-paddy.jpg https://as2.ftcdn.net/v2/jpg/02/50/10/17/1000_F_250101768_Qhn6oFRCgQArmI5Ov5EY3EOtYTTHpOg5.jpg-->
     
-  <img class="img-fluid w-100" src="https://e0.pxfuel.com/wallpapers/379/496/desktop-wallpaper-rice-field-paddy.jpg" alt="Web Developer" style="max-height: 400px;">
+  <img class="img-fluid w-100" src="https://as2.ftcdn.net/v2/jpg/02/50/10/17/1000_F_250101768_Qhn6oFRCgQArmI5Ov5EY3EOtYTTHpOg5.jpg" alt="Web Developer" style="max-height: 800px;">
   <div class="container position-absolute top-50 start-50 translate-middle">
-    <h1 class="text-black fw-bold" >Introducing a Revolutionary Approach</h1>
+    <h1 class="text-black fw-bold text-left">Introducing a Revolutionary Approach</h1>
     <p class="lead my-4 text-white fw-bold">
     "Empowering Paddy Farmers with Precision Fertilizer Distribution for Bountiful Harvests"
     </p>

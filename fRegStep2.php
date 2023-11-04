@@ -14,6 +14,25 @@
         width: 95%;
         border-radius: 5px;
     }
+    body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://amazinglanka.com/wp/wp-content/uploads/2015/07/1098746.jpg'); /* Replace 'your-image-url.jpg' with the actual URL of your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(8px); /* Adjust the '5px' value to control the amount of blur */
+        }
+        .box-area {
+            max-width: 750px; /* Adjust the max-width to your preferred size */
+            margin: 0 auto; /* Center the box horizontally */
+            padding: 20px; /* Add some padding to the box */
+        }
+        
     </style>
 </head>
 <body>
@@ -22,7 +41,7 @@
             <div class="col-md-12 right-box">
                 <div class="row align-items-center">
                     <div class="header-text mb-4">
-                        <h2 class="mb-3">Registration</h2>
+                        <h2 class="mb-3">Registration - Step 2</h2>
                         <?php
                             // Display error message if it exists in the URL parameters
                             if (isset($_GET['error'])) {
@@ -91,7 +110,7 @@
                             </div>
                             <input type="hidden" name="NIC" value="<?php echo $NIC; ?>">
                             <button type="button" class="btn btn-primary prev-btn">Previous</button>
-                            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                            <button type="submit" onclick="document.getElementById('popup1').style.visibility = 'visible';" class="btn btn-primary submit-btn">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -136,4 +155,95 @@
     <script src="js/fRegStep2Validation.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    text-align: center;
+}
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    z-index: 2; /* Ensure it's clickable */
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+@media screen and (max-width: 700px) {
+    .box{
+        width: 70%;
+    }
+    .popup{
+        width: 70%;
+    }
+}
+.image-section {
+  position: absolute;
+  bottom: 20;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.image-section img {
+  margin: 0 10px;
+}
+</style>
+</head>
+<body>
+    
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Order Placed Successfully</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+           You have placed the order successfully!
+        </div>
+    </div>
+</div>
+
+<div class="image-section">
+    
+</div>
+</body>
+</html>
+
 

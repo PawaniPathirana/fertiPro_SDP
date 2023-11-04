@@ -233,6 +233,13 @@
 </head>
 <body>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
 <div class="container">
     <h1>Search for Farmers</h1>
     <form method="post" action="search.php">
@@ -243,69 +250,65 @@
     </form>
 </div>
 
-<div class="container">
-    <h2>All Farmers</h2>
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>NIC</th>
-                <th>Field Address</th>
-                <th>Personal Address</th>
-                <th>View</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            include "dbConn.php";
-            if (!$con) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-
-            $sql = "SELECT fm.memberID, fm.firstName, fm.lastName, fm.NIC, f.farmerID, f.personalAddress, f.fieldAddress, fm.GN_Division
-                    FROM fa_member AS fm
-                    LEFT JOIN farmers AS f ON fm.memberID = f.memberID";
-
-            $result = mysqli_query($con, $sql);
-
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'>" . $row['firstName'] . "</td>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'>" . $row['lastName'] . "</td>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'>" . $row['NIC'] . "</td>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'>" . $row['fieldAddress'] . "</td>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'>" . $row['personalAddress'] . "</td>";
-                    echo "<td style='padding: 14px; border: 1px solid #ddd;'><button class='btn btn-info' onclick='viewDetails(" . $row['memberID'] . ")'>View</button></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6'>No farmers found.</td></tr>";
-            }
-
-            mysqli_close($con);
-            ?>
-        </tbody>
-    </table>
-</div>
-
-<div class="container">
-    <h2>Farmer Details</h2>
-    <div id="farmerDetails"></div>
-</div>
-
-<script>
-    function viewDetails(memberID) {
-        // You can use JavaScript/jQuery to fetch and display farmer details based on the memberID
-        // Example: make an AJAX request to retrieve details and populate the "farmerDetails" div
-        // You can use jQuery or vanilla JavaScript for this.
-        // Here's a placeholder for the details:
-        var detailsHTML = "<p>Details for Farmer with Member ID: " + memberID + "</p>";
-        // You can add more details here.
-        document.getElementById("farmerDetails").innerHTML = detailsHTML;
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "dbConn.php";
+    if (!$con) {
+        die("Connection failed: " . mysqli_connect_error());
     }
-</script>
+
+    // Process the search request
+    $search_name = mysqli_real_escape_string($con, $_POST['search_name']);
+
+    $sql = "SELECT fm.memberID, fm.firstName, fm.lastName, fm.NIC, f.farmerID, f.personalAddress, f.telephone, f.fieldAddress, fm.GN_Division, o.orderID, o.quantityOfUrea, o.quantityOfMOP, o.quantityOfTSP, o.priceOfUrea, o.priceOfMOP, o.priceOfTSP, 
+            SUM(o.quantityOfUrea + o.quantityOfMOP + o.quantityOfTSP) AS totalQuantity,
+            o.totalPrice
+            FROM fa_member AS fm
+            LEFT JOIN farmers AS f ON fm.memberID = f.memberID
+            LEFT JOIN orders AS o ON f.farmerID = o.farmerID
+            WHERE fm.firstName = '$search_name' OR fm.lastName = '$search_name'
+            GROUP BY fm.memberID";
+
+    $result = mysqli_query($con, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='container'>";
+            echo "<p>Member ID: " . $row['memberID'] . "</p>";
+            echo "<p>First Name: " . $row['firstName'] . "</p>";
+            echo "<p>Last Name: " . $row['lastName'] . "</p>";
+            echo "<p>NIC: " . $row['NIC'] . "</p>";
+            if ($row['orderID']) {
+                echo "<p>Order ID: " . $row['orderID'] . "</p>";
+                echo "<p>Quantity of Urea: " . $row['quantityOfUrea'] . " kg</p>";
+                echo "<p>Quantity of MOP: " . $row['quantityOfMOP'] . " kg</p>";
+                echo "<p>Quantity of TSP: " . $row['quantityOfTSP'] . " kg</p>";
+                echo "<p>Price of Urea: Rs. " . $row['priceOfUrea'] . "  </p>";
+                echo "<p>Price of MOP: Rs. " . $row['priceOfMOP'] . " </p>";
+                echo "<p>Price of TSP: Rs. " . $row['priceOfTSP'] . " </p>";
+                echo "<p>Total Quantity: " . $row['totalQuantity'] . "kg </p>";
+                echo "<p>Total Price: Rs. " . $row['totalPrice'] . "</p>";
+                echo "<p>Status: Ordered</p>";
+            } elseif ($row['farmerID']) {
+                echo "<p>Farmer ID: " . $row['farmerID'] . "</p>";
+                echo "<p>Personal Address: " . $row['personalAddress'] . "</p>";
+                echo "<p>Telephone: " . $row['telephone'] . "</p>";
+                echo "<p>Field Address: " . $row['fieldAddress'] . "</p>";
+                echo "<p>GN Division: " . $row['GN_Division'] . "</p>";
+                echo "<p>Status: Registered with the Program</p>";
+            } else {
+                echo "<p>Status: Not Registered with the Program</p>";
+            }
+            echo "</div>";
+        }
+    } else {
+        echo "No results found.";
+    }
+
+    // Close the database connection
+    mysqli_close($con);
+}
+?>
 
 </body>
 </html>
